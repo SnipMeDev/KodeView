@@ -1,0 +1,19 @@
+[versions]
+jvmTarget = "1.8"
+gradlePlugin = "7.1.3"
+kotlin = "1.6.10"
+ksp = "1.8.10-1.0.9"
+kotlinCompilerExtensionVersion = "1.4.5"
+kotlinAndroid = "1.8.20"
+kotlinMultiplatform = "1.8.20"
+compose = "1.4.0"
+composeCompiler = "1.4.5"
+androidLibrary = "8.0.0"
+
+[plugins]
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlinMultiplatform" }
+compose = { id = "org.jetbrains.compose", version.ref = "compose" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinAndroid" }
+android-application = { id = "com.android.application" }
+android-library = { id = "com.android.library", version.ref = "androidLibrary" }
