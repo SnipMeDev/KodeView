@@ -1,4 +1,4 @@
-![kodeview_banner](https://github.com/SnipMeDev/KodeView/assets/8405055/6311ac3c-5e56-45bd-bc27-1790093f09fd)
+![kodeview_banner_opaque](https://github.com/SnipMeDev/KodeView/assets/8405055/59c6a2af-1b32-4a02-998f-ecae2296363a)
 
 # KodeView
 
