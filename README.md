@@ -1,3 +1,5 @@
+![kodeview_banner](https://github.com/SnipMeDev/KodeView/assets/8405055/6311ac3c-5e56-45bd-bc27-1790093f09fd)
+
 # KodeView
 
 Kotlin Compose Multiplatform components for syntax highlighting based on
