@@ -18,7 +18,8 @@ android {
 }
 
 kotlin {
-    android {
+    // Android
+    androidTarget {
         compilations.all {
             kotlinOptions {
                 jvmTarget = libs.versions.jvmTarget.get()
@@ -26,16 +27,31 @@ kotlin {
         }
     }
 
+    // iOS
     listOf(
         iosX64(),
         iosArm64(),
-        iosSimulatorArm64()
+        iosSimulatorArm64(),
+        macosX64(),
+        macosArm64(),
     ).forEach {
         it.binaries.framework {
             baseName = "shared"
             isStatic = true
         }
     }
+
+    // Desktop
+//    mingwX64()
+//    linuxX64()
+//    linuxArm64()
+
+    // Web
+//    js(IR) {
+//        binaries.executable()
+//        browser()
+//        nodejs()
+//    }
 
     sourceSets {
         // Common
@@ -47,7 +63,7 @@ kotlin {
                 implementation(compose.ui)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
-                api("dev.snipme:highlights:0.3.0-SNAPSHOT")
+                api("dev.snipme:highlights:0.6.0")
             }
         }
         val commonTest by getting {
