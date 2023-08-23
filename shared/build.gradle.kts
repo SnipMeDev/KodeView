@@ -18,6 +18,10 @@ android {
 }
 
 kotlin {
+    jvm {
+//        withJava()
+    }
+
     // Android
     androidTarget {
         compilations.all {
@@ -32,14 +36,21 @@ kotlin {
         iosX64(),
         iosArm64(),
         iosSimulatorArm64(),
-        macosX64(),
-        macosArm64(),
     ).forEach {
         it.binaries.framework {
             baseName = "shared"
             isStatic = true
         }
     }
+
+//    val hostOs = System.getProperty("os.name")
+//    val isMingwX64 = hostOs.startsWith("Windows")
+//    val nativeTarget = when {
+//        hostOs == "Mac OS X" -> macosX64("macos")
+//        hostOs == "Linux" -> linuxX64("linux")
+//        isMingwX64 -> mingwX64("win")
+//        else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
+//    }
 
     // Desktop
 //    mingwX64()
@@ -88,6 +99,12 @@ kotlin {
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
+
         }
+        val jvmMain by getting
+        // Desktop
+//        val macosX64Main by getting {
+//            dependsOn(commonMain)
+//        }
     }
 }

@@ -7,8 +7,9 @@ kotlinCompilerExtensionVersion = "1.4.5"
 kotlinAndroid = "1.9.0"
 kotlinMultiplatform = "1.9.0"
 compose = "1.4.3"
-composeCompiler = "1.4.5"
+composeCompiler = "1.5.1"
 androidLibrary = "8.0.0"
+org-jetbrains-kotlin-jvm = "1.9.0"
 
 [plugins]
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
@@ -17,3 +18,5 @@ compose = { id = "org.jetbrains.compose", version.ref = "compose" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinAndroid" }
 android-application = { id = "com.android.application" }
 android-library = { id = "com.android.library", version.ref = "androidLibrary" }
+org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org-jetbrains-kotlin-jvm" }
+[libraries]
