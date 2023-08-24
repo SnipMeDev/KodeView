@@ -36,8 +36,11 @@ private val sampleCode =
 fun main() = application {
     Window(
         onCloseRequest = ::exitApplication,
-        title = "Compose for Desktop",
-        state = rememberWindowState(width = 300.dp, height = 300.dp)
+        title = "Highlights example",
+        state = rememberWindowState(
+            width = 300.dp,
+            height = 300.dp,
+        )
     ) {
         val highlights = remember {
             mutableStateOf(
