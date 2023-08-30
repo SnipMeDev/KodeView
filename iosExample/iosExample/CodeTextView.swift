@@ -8,8 +8,6 @@
 import SwiftUI
 import shared
 
-// TODO Correct UIViewController
-
 // Omit KMM library prefixing
 typealias Highlights = HighlightsHighlights
 
