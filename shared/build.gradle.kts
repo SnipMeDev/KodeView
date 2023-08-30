@@ -6,11 +6,11 @@ plugins {
 }
 
 group = "dev.snipme"
-version = "0.1.1"
+version = "0.1.2"
 
 android {
     namespace = "dev.snipme.kodeview"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 21
@@ -47,7 +47,8 @@ kotlin {
                 implementation(compose.ui)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
-                api("dev.snipme:highlights:0.3.0-SNAPSHOT")
+                // Share logic between submodules
+                api("dev.snipme:highlights:0.6.0")
             }
         }
         val commonTest by getting {

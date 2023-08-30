@@ -1,3 +1,11 @@
+## [0.1.2]
+
+### Changed
+
+- Highlights library version
+- Kotlin version to 1.9.0
+- Compile SDK to 34
+
 ## [0.1.1]
 
 ### Added
