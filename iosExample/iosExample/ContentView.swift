@@ -15,7 +15,7 @@ struct ContentView: View {
     @State var highlights = Highlights.companion.default()
     private let themes = Highlights.companion.themes(darkMode: false)
     private let languages = SyntaxLanguage.companion.getNames()
-    
+
     init() {
         highlights.setCode(code:
                 """
@@ -61,7 +61,7 @@ struct ContentView: View {
             }
         }
     }
-    
+
     func getThemeNames(themes: Dictionary<String, SyntaxTheme>) -> Array<String> {
         return themes.keys.map { $0.description }.sorted()
     }
