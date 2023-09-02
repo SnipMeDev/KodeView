@@ -5,6 +5,13 @@ pluginManagement {
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
         mavenCentral()
     }
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "kotlin2js") {
+                useModule("org.jetbrains.kotlin:kotlin-gradle-plugin:${requested.version}")
+            }
+        }
+    }
 }
 
 dependencyResolutionManagement {
@@ -20,3 +27,4 @@ dependencyResolutionManagement {
 rootProject.name = "KodeView"
 include(":shared")
 include(":androidExample")
+include(":webExample")

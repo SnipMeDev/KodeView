@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "dev.snipme"
-version = "0.1.2"
+version = "0.2.0"
 
 android {
     namespace = "dev.snipme.kodeview"
@@ -56,6 +56,7 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
+
         // Android
         val androidMain by getting {
             dependencies {
@@ -64,6 +65,7 @@ kotlin {
                 implementation("androidx.core:core-ktx:1.10.1")
             }
         }
+
         // iOS
         val iosX64Main by getting
         val iosArm64Main by getting
