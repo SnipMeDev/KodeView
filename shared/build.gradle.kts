@@ -38,6 +38,7 @@ kotlin {
     }
 
     sourceSets {
+        jvm()
         // Common
         val commonMain by getting {
             dependencies {
