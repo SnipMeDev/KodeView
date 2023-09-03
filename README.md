@@ -84,3 +84,35 @@ struct ContentView: View {
 }
 
 ```
+
+#### Desktop
+
+```kotlin
+private val windowSize = 500.dp
+
+fun main() = application {
+    Window(
+        onCloseRequest = ::exitApplication,
+        state = rememberWindowState(
+            width = windowSize,
+            height = windowSize,
+        )
+    ) {
+        val highlights = remember {
+            mutableStateOf(
+                Highlights
+                    .default()
+                    .getBuilder()
+                    .code("public static void main(String[] args) {}")
+                    .build()
+            )
+        }
+
+        MaterialTheme {
+            Column {
+                CodeTextView(highlights = highlights.value)
+            }
+        }
+    }
+}
+```
