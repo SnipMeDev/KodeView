@@ -1,3 +1,10 @@
+## [0.2.0]
+
+### Added
+
+- Desktop example
+- JVM target type
+
 ## [0.1.2]
 
 ### Changed
