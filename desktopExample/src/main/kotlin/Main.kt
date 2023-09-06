@@ -38,7 +38,7 @@ private val sampleCode =
 fun main() = application {
     Window(
         onCloseRequest = ::exitApplication,
-        title = "Highlights example",
+        title = "KodeView example",
         state = rememberWindowState(
             width = windowSize,
             height = windowSize,
@@ -64,7 +64,7 @@ fun main() = application {
             ) {
                 Text(
                     modifier = Modifier.fillMaxWidth(),
-                    text = "Highlights",
+                    text = "KodeView",
                     fontSize = 18.sp,
                     textAlign = TextAlign.Center
                 )
