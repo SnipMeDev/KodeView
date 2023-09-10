@@ -48,12 +48,12 @@ android {
 dependencies {
     // Core
     implementation(project(path = ":shared"))
-    implementation("androidx.core:core-ktx:1.10.0")
+    implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     // Compose
     val composeBom = platform("androidx.compose:compose-bom:2023.03.00")
     implementation(composeBom)
-    implementation("androidx.activity:activity-compose:1.7.0")
+    implementation("androidx.activity:activity-compose:1.7.2")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.ui:ui-tooling-preview")
     debugImplementation("androidx.compose.ui:ui-tooling")

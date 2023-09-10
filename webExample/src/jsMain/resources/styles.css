@@ -1,0 +1,16 @@
+#root {
+    width: 100%;
+    height: 100vh;
+}
+
+canvas {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    display: block;
+}
+
+#root > .compose-web-column > div {
+    position: relative;
+}
