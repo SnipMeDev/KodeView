@@ -12,11 +12,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.CanvasBasedWindow
 import dev.snipme.highlights.Highlights
 import dev.snipme.highlights.model.SyntaxLanguage
 import dev.snipme.highlights.model.SyntaxThemes
@@ -32,9 +33,14 @@ private val sampleCode =
     }
     """.trimIndent()
 
+@ExperimentalComposeUiApi
 fun main() {
     onWasmReady {
-        Window("KodeView example") {
+        CanvasBasedWindow(
+            title = "KodeView example",
+            canvasElementId = "ComposeTarget",
+            applyDefaultStyles = true,
+        ) {
             val highlights = remember {
                 mutableStateOf(
                     Highlights
@@ -79,7 +85,10 @@ fun main() {
                     Dropdown(
                         options = SyntaxLanguage.getNames(),
                         selected = SyntaxLanguage.getNames().indexOfFirst {
-                            it.equals(highlights.value.getLanguage().name, ignoreCase = true)
+                            it.equals(
+                                highlights.value.getLanguage().name,
+                                ignoreCase = true
+                            )
                         }) { selectedLanguage ->
                         highlights.value = highlights.value.getBuilder()
                             .language(SyntaxLanguage.getByName(selectedLanguage)!!)

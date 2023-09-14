@@ -1,6 +1,7 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    kotlin("multiplatform")
-    id("org.jetbrains.compose")
+    alias(libs.plugins.multiplatform)
+    alias(libs.plugins.compose)
 }
 
 kotlin {
@@ -8,8 +9,9 @@ kotlin {
         browser()
         binaries.executable()
     }
+
     sourceSets {
-        val jsMain by getting  {
+        val jsMain by getting {
             dependencies {
                 implementation(project(":shared"))
                 implementation(compose.ui)
