@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "dev.snipme"
-version = "0.2.0"
+version = "0.3.0"
 
 android {
     namespace = "dev.snipme.kodeview"
@@ -19,6 +19,10 @@ android {
 
 kotlin {
     jvm()
+
+    js(IR) {
+        browser()
+    }
 
     android {
         compilations.all {
@@ -63,7 +67,7 @@ kotlin {
             dependencies {
                 implementation("androidx.activity:activity-compose:1.7.2")
                 implementation("androidx.appcompat:appcompat:1.6.1")
-                implementation("androidx.core:core-ktx:1.10.1")
+                implementation("androidx.core:core-ktx:1.12.0")
             }
         }
         // iOS

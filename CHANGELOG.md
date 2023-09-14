@@ -1,3 +1,16 @@
+## [0.3.0]
+
+### Added
+
+- Web example
+- JS target type
+- Web correlated flags
+
+### Changed
+
+- Kotlin version
+- Plugins version
+
 ## [0.2.0]
 
 ### Added

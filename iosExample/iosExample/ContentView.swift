@@ -30,7 +30,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text("Highlights")
+            Text("KodeView")
             Divider()
             CodeTextView(newHighlights: $highlights)
                 .ignoresSafeArea(.keyboard)

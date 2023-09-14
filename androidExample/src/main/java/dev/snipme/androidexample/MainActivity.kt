@@ -67,7 +67,7 @@ fun App() {
         ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = "Highlights",
+                text = "KodeView",
                 fontSize = 18.sp,
                 textAlign = TextAlign.Center
             )
