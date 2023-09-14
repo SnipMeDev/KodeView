@@ -7,7 +7,7 @@ Kotlin Compose Multiplatform components for syntax highlighting based on
 
 ## Preview
 
-
+<img width="1680" alt="iShot_2023-09-14_08 19 21" src="https://github.com/SnipMeDev/KodeView/assets/8405055/adb205e4-ea16-41f7-aacb-de1085d6d5f5">
 
 ## Installation
 TBD
@@ -20,7 +20,6 @@ The basic component that takes instance of Highlights and applies coloring on te
 #### Android
 
 ```kotlin
-
 @Composable
 fun MyApp() {
     val highlights = remember {
@@ -39,13 +38,11 @@ fun MyApp() {
       }
    }
 }
-
 ```
 
 #### iOS
 
 ```swift
-
 struct MyApp: App {
     var body: some Scene {
         WindowGroup {
@@ -69,7 +66,6 @@ struct ContentView: View {
         }
     }
 }
-
 ```
 
 #### Desktop
@@ -107,7 +103,6 @@ fun main() = application {
 #### Web
 
 ```kotlin
-
 @ExperimentalComposeUiApi
 fun main() {
     onWasmReady {
@@ -133,5 +128,4 @@ fun main() {
         }
     }
 }
-
 ```
