@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "dev.snipme"
-version = "0.2.0"
+version = "0.3.0"
 
 android {
     namespace = "dev.snipme.kodeview"
