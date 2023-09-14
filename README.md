@@ -7,20 +7,7 @@ Kotlin Compose Multiplatform components for syntax highlighting based on
 
 ## Preview
 
-<table>
-  <tr>
-    <th>Android</th>
-    <th>iOS</th>
-  </tr>
-  <tr>
-    <td>
-      <img src="https://github.com/SnipMeDev/KodeView/assets/8405055/a051e91f-b726-4050-b3bd-0c0fb9afb4b5" width="500">
-    </td>
-    <td>
-      <img src="https://github.com/SnipMeDev/KodeView/assets/8405055/853afa56-c02a-47de-b0e4-85e6d45fe2e8" width="400">
-    </td>
-  </tr>
-</table>
+<img width="1680" alt="iShot_2023-09-14_08 19 21" src="https://github.com/SnipMeDev/KodeView/assets/8405055/adb205e4-ea16-41f7-aacb-de1085d6d5f5">
 
 ## Installation
 TBD
@@ -33,7 +20,6 @@ The basic component that takes instance of Highlights and applies coloring on te
 #### Android
 
 ```kotlin
-
 @Composable
 fun MyApp() {
     val highlights = remember {
@@ -52,13 +38,11 @@ fun MyApp() {
       }
    }
 }
-
 ```
 
 #### iOS
 
 ```swift
-
 struct MyApp: App {
     var body: some Scene {
         WindowGroup {
@@ -82,7 +66,6 @@ struct ContentView: View {
         }
     }
 }
-
 ```
 
 #### Desktop
@@ -111,6 +94,36 @@ fun main() = application {
         MaterialTheme {
             Column {
                 CodeTextView(highlights = highlights.value)
+            }
+        }
+    }
+}
+```
+
+#### Web
+
+```kotlin
+@ExperimentalComposeUiApi
+fun main() {
+    onWasmReady {
+        CanvasBasedWindow(
+            canvasElementId = "ComposeTarget",
+            applyDefaultStyles = true,
+        ) {
+            val highlights = remember {
+                mutableStateOf(
+                    Highlights
+                        .default()
+                        .getBuilder()
+                        .code("public static void main(String[] args) {}")
+                        .build()
+                )
+            }
+    
+            MaterialTheme {
+                Column {
+                    CodeTextView(highlights = highlights.value)
+                }
             }
         }
     }

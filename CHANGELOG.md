@@ -1,3 +1,8 @@
+## [0.3.1]
+
+### Added
+- Web section to README
+
 ## [0.3.0]
 
 ### Added
