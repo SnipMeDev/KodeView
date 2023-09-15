@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import shared
+import kodeview
 
 // Omit KMM library prefixing
 typealias Highlights = HighlightsHighlights

@@ -46,8 +46,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":kodeview"))
     // Core
-    implementation(project(path = ":shared"))
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     // Compose

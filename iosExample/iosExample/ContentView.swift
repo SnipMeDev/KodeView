@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import shared
+import kodeview
 
 typealias SyntaxLanguage = HighlightsSyntaxLanguage
 typealias SyntaxTheme = HighlightsSyntaxTheme

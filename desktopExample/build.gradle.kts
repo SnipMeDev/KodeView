@@ -5,7 +5,6 @@ plugins {
 }
 
 dependencies {
-    implementation(project(path = ":shared"))
     implementation(compose.runtime)
     implementation(compose.foundation)
     implementation(compose.material)
@@ -14,6 +13,7 @@ dependencies {
     @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
     implementation(compose.components.resources)
     implementation(compose.desktop.currentOs)
+    implementation("dev.snipme:kodeview:0.4.0")
 }
 
 compose.desktop {

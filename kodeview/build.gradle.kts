@@ -3,10 +3,11 @@ plugins {
     alias(libs.plugins.multiplatform)
     alias(libs.plugins.android.library)
     alias(libs.plugins.compose)
+    id("maven-publish")
 }
 
 group = "dev.snipme"
-version = "0.3.1"
+version = "0.4.0"
 
 android {
     namespace = "dev.snipme.kodeview"
@@ -38,8 +39,60 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "shared"
+            baseName = "kodeview"
             isStatic = true
+        }
+    }
+
+    publishing {
+        val emptyJar = tasks.register<Jar>("emptyJar") {
+            archiveAppendix.set("empty")
+        }
+
+        publications.forEach {
+            val publication = it as? MavenPublication ?: return@forEach
+
+            publication.artifact(emptyJar) {
+                classifier = "javadoc"
+            }
+
+            publication.pom.withXml {
+                val root = asNode()
+                root.appendNode("name", "kodeview")
+                root.appendNode(
+                    "description",
+                    "Kotlin Multiplatform syntax highlighting views"
+                )
+                root.appendNode("url", "https://github.com/SnipMeDev/KodeView")
+
+                root.appendNode("licenses").apply {
+                    appendNode("license").apply {
+                        appendNode("name", "The Apache Software License, Version 2.0")
+                        appendNode("url", "https://www.apache.org/licenses/LICENSE-2.0.txt")
+                        appendNode("distribution", "repo")
+                    }
+                }
+
+                root.appendNode("developers").apply {
+                    appendNode("developer").apply {
+                        appendNode("id", "tkadziolka")
+                        appendNode("name", "Tomasz Kądziołka")
+                        appendNode("email", "kontakt@tkadziolka.pl")
+                    }
+                }
+
+                root.appendNode("scm").apply {
+                    appendNode(
+                        "connection",
+                        "scm:git:ssh://git@github.com:SnipMeDev/KodeView.git"
+                    )
+                    appendNode(
+                        "developerConnection",
+                        "scm:git:ssh://git@github.org:SnipMeDev/KodeView.git",
+                    )
+                    appendNode("url", "https://github.com/SnipMeDev/KodeView")
+                }
+            }
         }
     }
 
