@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="desktopExample" type="JetRunConfigurationType">
+    <option name="MAIN_CLASS_NAME" value="dev.snipme.desktopexample.MainKt" />
+    <module name="KodeView.desktopExample.main" />
+    <shortenClasspath name="NONE" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

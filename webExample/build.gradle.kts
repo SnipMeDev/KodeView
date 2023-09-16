@@ -13,11 +13,11 @@ kotlin {
     sourceSets {
         val jsMain by getting {
             dependencies {
-                implementation(project(":shared"))
                 implementation(compose.ui)
                 implementation(compose.foundation)
                 implementation(compose.material)
                 implementation(compose.material3)
+                implementation("dev.snipme:kodeview:0.4.0")
             }
         }
     }

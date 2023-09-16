@@ -47,7 +47,6 @@ android {
 
 dependencies {
     // Core
-    implementation(project(path = ":shared"))
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     // Compose
@@ -58,4 +57,5 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation("dev.snipme:kodeview:0.4.0")
 }

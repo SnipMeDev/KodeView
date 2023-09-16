@@ -38,7 +38,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "KodeView"
-include(":shared")
+include(":kodeview")
 include(":androidExample")
 include(":desktopExample")
 include(":webExample")
