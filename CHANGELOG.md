@@ -1,6 +1,23 @@
+## [0.5.0]
+
+### Added
+- Maven publication
+
+### Changed
+- README sections
+
+## [0.4.0]
+
+### Added
+- Maven local publication
+
+### Changed
+- KodeView import model 
+
 ## [0.3.1]
 
 ### Added
+
 - Web section to README
 
 ## [0.3.0]

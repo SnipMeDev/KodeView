@@ -9,3 +9,5 @@ plugins {
     id("org.jetbrains.compose") apply false
     id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
 }
+
+apply(from = "publish-root.gradle")
