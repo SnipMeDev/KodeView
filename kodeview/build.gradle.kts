@@ -83,58 +83,6 @@ kotlin {
             iosSimulatorArm64Main.dependsOn(this)
         }
     }
-
-    publishing {
-        val emptyJar = tasks.register<Jar>("emptyJar") {
-            archiveAppendix.set("empty")
-        }
-
-        publications.forEach {
-            val publication = it as? MavenPublication ?: return@forEach
-
-            publication.artifact(emptyJar) {
-                classifier = "javadoc"
-            }
-
-            publication.pom.withXml {
-                val root = asNode()
-                root.appendNode("name", "kodeview")
-                root.appendNode(
-                    "description",
-                    "Kotlin Multiplatform syntax highlighting views"
-                )
-                root.appendNode("url", "https://github.com/SnipMeDev/KodeView")
-
-                root.appendNode("licenses").apply {
-                    appendNode("license").apply {
-                        appendNode("name", "The Apache Software License, Version 2.0")
-                        appendNode("url", "https://www.apache.org/licenses/LICENSE-2.0.txt")
-                        appendNode("distribution", "repo")
-                    }
-                }
-
-                root.appendNode("developers").apply {
-                    appendNode("developer").apply {
-                        appendNode("id", "tkadziolka")
-                        appendNode("name", "Tomasz Kądziołka")
-                        appendNode("email", "kontakt@tkadziolka.pl")
-                    }
-                }
-
-                root.appendNode("scm").apply {
-                    appendNode(
-                        "connection",
-                        "scm:git:ssh://git@github.com:SnipMeDev/KodeView.git"
-                    )
-                    appendNode(
-                        "developerConnection",
-                        "scm:git:ssh://git@github.org:SnipMeDev/KodeView.git",
-                    )
-                    appendNode("url", "https://github.com/SnipMeDev/KodeView")
-                }
-            }
-        }
-    }
 }
 
 signing {
@@ -144,4 +92,65 @@ signing {
         rootProject.ext["signing.password"] as String
     )
     sign(publishing.publications)
+}
+
+publishing {
+    val emptyJar = tasks.register<Jar>("emptyJar") {
+        archiveAppendix.set("empty")
+    }
+
+    publications.forEach {
+        val publication = it as? MavenPublication ?: return@forEach
+
+        publication.artifact(emptyJar) {
+            classifier = "javadoc"
+        }
+
+        publication.pom.withXml {
+            val root = asNode()
+            root.appendNode("name", "kodeview")
+            root.appendNode(
+                "description",
+                "Kotlin Multiplatform syntax highlighting views"
+            )
+            root.appendNode("url", "https://github.com/SnipMeDev/KodeView")
+
+            root.appendNode("licenses").apply {
+                appendNode("license").apply {
+                    appendNode("name", "The Apache Software License, Version 2.0")
+                    appendNode("url", "https://www.apache.org/licenses/LICENSE-2.0.txt")
+                    appendNode("distribution", "repo")
+                }
+            }
+
+            root.appendNode("developers").apply {
+                appendNode("developer").apply {
+                    appendNode("id", "tkadziolka")
+                    appendNode("name", "Tomasz Kądziołka")
+                    appendNode("email", "kontakt@tkadziolka.pl")
+                }
+            }
+
+            root.appendNode("scm").apply {
+                appendNode(
+                    "connection",
+                    "scm:git:ssh://git@github.com:SnipMeDev/KodeView.git"
+                )
+                appendNode(
+                    "developerConnection",
+                    "scm:git:ssh://git@github.org:SnipMeDev/KodeView.git",
+                )
+                appendNode("url", "https://github.com/SnipMeDev/KodeView")
+            }
+        }
+    }
+}
+
+tasks.withType<PublishToMavenRepository> {
+    dependsOn(":kodeview:signIosSimulatorArm64Publication")
+    dependsOn(":kodeview:signIosArm64Publication")
+    dependsOn(":kodeview:signIosX64Publication")
+    dependsOn(":kodeview:signJvmPublication")
+    dependsOn(":kodeview:signJsPublication")
+    dependsOn(":kodeview:signKotlinMultiplatformPublication")
 }
