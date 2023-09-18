@@ -17,7 +17,7 @@ kotlin {
                 implementation(compose.foundation)
                 implementation(compose.material)
                 implementation(compose.material3)
-                implementation("dev.snipme:kodeview:0.4.0")
+                implementation(libs.kodeview)
             }
         }
     }
