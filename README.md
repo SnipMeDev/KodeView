@@ -66,17 +66,9 @@ fun MyApp() {
 
 ## Run examples 🏎️
 
-Desktop
+Not all examples can be executed from command line, so recommended way is to use pre-created configurations:
 
-```shell
-./gradlew :webExample:jsBrowserRun
-```
-
-Browser
-
-```shell
-./gradlew :webExample:jsBrowserRun
-```
+<img width="270" alt="iShot_2023-09-18_08 19 44" src="https://github.com/SnipMeDev/KodeView/assets/8405055/be660f49-5a77-445e-a717-6aaec9b5c28a">
 
 ## TODO 🚧
 - [ ] CodeEditText
