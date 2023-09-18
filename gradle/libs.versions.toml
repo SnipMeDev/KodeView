@@ -9,7 +9,7 @@ kotlinMultiplatform = "1.9.10"
 compose = "1.5.1"
 composeCompiler = "1.5.1"
 androidLibrary = "8.0.0"
-kodeview = "0.4.0"
+kodeview = "0.5.0"
 
 [libraries]
 kodeview = { group = "dev.snipme", name = "kodeview", version.ref = "kodeview" }
