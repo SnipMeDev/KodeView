@@ -5,6 +5,7 @@
 
 ### Changed
 - README sections
+- KodeView dependency import style
 
 ## [0.4.0]
 

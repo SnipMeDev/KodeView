@@ -13,7 +13,7 @@ dependencies {
     @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
     implementation(compose.components.resources)
     implementation(compose.desktop.currentOs)
-    implementation("dev.snipme:kodeview:0.4.0")
+    implementation(libs.kodeview)
 }
 
 compose.desktop {

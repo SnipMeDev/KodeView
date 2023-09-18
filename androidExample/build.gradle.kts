@@ -57,5 +57,5 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-    implementation("dev.snipme:kodeview:0.4.0")
+    implementation(libs.kodeview)
 }
