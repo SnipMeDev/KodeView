@@ -10,10 +10,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.darkColors
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -56,7 +59,10 @@ fun main() = application {
             )
         }
 
-        MaterialTheme {
+        // TODO Add theme switch to examples
+        MaterialTheme(
+            colors = darkColors()
+        ) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -81,6 +87,9 @@ fun main() = application {
 
                 Spacer(modifier = Modifier.size(16.dp))
 
+                // TODO "" breaks Highlights
+                // TODO Add feature: tab as 4 spaces option?
+
                 CodeEditText(
                     highlights = highlights.value,
                     onValueChange = { textValue ->
@@ -88,6 +97,13 @@ fun main() = application {
                             .code(textValue)
                             .build()
                     },
+                    colors = TextFieldDefaults.textFieldColors(
+                        backgroundColor = Color.Transparent,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        disabledIndicatorColor = Color.Transparent,
+                        errorIndicatorColor = Color.Transparent,
+                    ),
                 )
 
                 Spacer(modifier = Modifier.size(16.dp))
