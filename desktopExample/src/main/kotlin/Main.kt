@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
@@ -22,6 +23,7 @@ import androidx.compose.ui.window.rememberWindowState
 import dev.snipme.highlights.Highlights
 import dev.snipme.highlights.model.SyntaxLanguage
 import dev.snipme.highlights.model.SyntaxThemes
+import dev.snipme.kodeview.view.CodeEditText
 import dev.snipme.kodeview.view.CodeTextView
 
 private val windowSize = 500.dp
@@ -72,6 +74,23 @@ fun main() = application {
                 Spacer(modifier = Modifier.size(16.dp))
 
                 CodeTextView(highlights = highlights.value)
+
+                Spacer(modifier = Modifier.size(16.dp))
+
+                Divider()
+
+                Spacer(modifier = Modifier.size(16.dp))
+
+                CodeEditText(
+                    highlights = highlights.value,
+                    onValueChange = { textValue ->
+                        highlights.value = highlights.value.getBuilder()
+                            .code(textValue)
+                            .build()
+                    },
+                )
+
+                Spacer(modifier = Modifier.size(16.dp))
 
                 Spacer(modifier = Modifier.weight(1f))
 
