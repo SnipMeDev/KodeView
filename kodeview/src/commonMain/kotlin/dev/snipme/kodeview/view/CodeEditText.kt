@@ -31,6 +31,7 @@ fun CodeEditText(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     readOnly: Boolean = false,
+    translateTabToSpaces: Boolean = true,
     textStyle: TextStyle = LocalTextStyle.current,
     label: @Composable (() -> Unit)? = null,
     placeholder: @Composable (() -> Unit)? = null,
@@ -63,7 +64,10 @@ fun CodeEditText(
             selection = currentText.value.selection,
             composition = currentText.value.composition,
             annotatedString = buildAnnotatedString {
-                append(highlights.getCode())
+                val codeText =
+                    getCodeText(translateTabToSpaces, highlights)
+
+                append(codeText)
 
                 highlights.getHighlights()
                     .filterIsInstance<ColorHighlight>()
@@ -104,4 +108,13 @@ fun CodeEditText(
         shape = shape,
         colors = colors,
     )
+}
+
+private fun getCodeText(
+    translateTabToSpaces: Boolean,
+    highlights: Highlights
+): String = if (translateTabToSpaces) {
+    highlights.getCode()
+} else {
+    highlights.getCode()
 }
