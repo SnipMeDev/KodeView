@@ -88,7 +88,6 @@ fun main() = application {
                 Spacer(modifier = Modifier.size(16.dp))
 
                 // TODO "" breaks Highlights
-                // TODO Add feature: tab as 4 spaces option?
 
                 CodeEditText(
                     highlights = highlights.value,

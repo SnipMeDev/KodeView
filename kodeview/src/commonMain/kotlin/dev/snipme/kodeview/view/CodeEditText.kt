@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -23,6 +24,9 @@ import androidx.compose.ui.text.input.VisualTransformation
 import dev.snipme.highlights.Highlights
 import dev.snipme.highlights.model.BoldHighlight
 import dev.snipme.highlights.model.ColorHighlight
+
+private const val TAB_LENGTH = 4
+private const val TAB_CHAR = "\t"
 
 @Composable
 fun CodeEditText(
@@ -57,17 +61,21 @@ fun CodeEditText(
     TextField(
         modifier = modifier.fillMaxWidth(),
         onValueChange = {
-            currentText.value = it
-            onValueChange(it.text)
+            val fieldUpdate = if (translateTabToSpaces && it.text.contains(TAB_CHAR)) {
+                val result = it.text.replace(TAB_CHAR, " ".repeat(TAB_LENGTH))
+                it.copy(text = result, TextRange(it.selection.start + TAB_LENGTH - 1))
+            } else {
+                it
+            }
+
+            currentText.value = fieldUpdate
+            onValueChange(fieldUpdate.text)
         },
         value = TextFieldValue(
             selection = currentText.value.selection,
             composition = currentText.value.composition,
             annotatedString = buildAnnotatedString {
-                val codeText =
-                    getCodeText(translateTabToSpaces, highlights)
-
-                append(codeText)
+                append(highlights.getCode())
 
                 highlights.getHighlights()
                     .filterIsInstance<ColorHighlight>()
@@ -108,13 +116,4 @@ fun CodeEditText(
         shape = shape,
         colors = colors,
     )
-}
-
-private fun getCodeText(
-    translateTabToSpaces: Boolean,
-    highlights: Highlights
-): String = if (translateTabToSpaces) {
-    highlights.getCode()
-} else {
-    highlights.getCode()
 }
