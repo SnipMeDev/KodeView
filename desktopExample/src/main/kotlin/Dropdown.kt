@@ -3,10 +3,12 @@ package dev.snipme.desktopexample
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.DropdownMenu
+import androidx.compose.material.Surface
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,32 +36,36 @@ fun Dropdown(
     var isExpanded by remember { mutableStateOf(false) }
 
     Column(Modifier.padding(16.dp)) {
-        DropdownMenu(
-            modifier = Modifier.background(Color.White),
-            expanded = isExpanded,
-            onDismissRequest = { isExpanded = false },
-        ) {
-            options.forEach { option ->
-                DropdownMenuItem(
-                    modifier = Modifier,
-                    text = { Text(text = option) },
-                    onClick = {
-                        selectedOption = option
-                        onSelect(option)
-                        isExpanded = !isExpanded
-                    },
+        Surface {
+            DropdownMenu(
+                modifier = Modifier.background(Color.White),
+                expanded = isExpanded,
+                onDismissRequest = { isExpanded = false },
+            ) {
+                options.forEach { option ->
+                    DropdownMenuItem(
+                        modifier = Modifier,
+                        text = { Text(text = option) },
+                        onClick = {
+                            selectedOption = option
+                            onSelect(option)
+                            isExpanded = !isExpanded
+                        },
+                    )
+                }
+            }
+
+            Surface {
+                Text(
+                    text = selectedOption,
+                    textAlign = TextAlign.Center,
+                    modifier = modifier
+                        .clip(RoundedCornerShape(16.dp))
+                        .fillMaxWidth()
+                        .clickable { isExpanded = !isExpanded }
+                        .padding(8.dp),
                 )
             }
         }
-
-        Text(
-            text = selectedOption,
-            textAlign = TextAlign.Center,
-            modifier = modifier
-                .clip(RoundedCornerShape(16.dp))
-                .fillMaxWidth()
-                .clickable { isExpanded = !isExpanded }
-                .padding(8.dp),
-        )
     }
 }

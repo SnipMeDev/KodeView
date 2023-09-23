@@ -11,6 +11,7 @@ dependencies {
     implementation(compose.material)
     implementation(compose.material3)
     implementation(compose.ui)
+    implementation(compose.materialIconsExtended)
     @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
     implementation(compose.components.resources)
     implementation(compose.desktop.currentOs)
