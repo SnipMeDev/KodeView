@@ -139,15 +139,13 @@ fun main() = application {
 
                     Spacer(modifier = Modifier.weight(1f))
 
-                    Surface {
-                        Dropdown(
-                            options = SyntaxThemes.getNames(),
-                            selected = SyntaxThemes.themes().keys.indexOf(highlights.getTheme().key),
-                        ) { selectedThemeName ->
-                            updateSyntaxTheme(
-                                SyntaxThemes.themes(isDarkMode)[selectedThemeName.lowercase()]!!
-                            )
-                        }
+                    Dropdown(
+                        options = SyntaxThemes.getNames(),
+                        selected = SyntaxThemes.themes().keys.indexOf(highlights.getTheme().key),
+                    ) { selectedThemeName ->
+                        updateSyntaxTheme(
+                            SyntaxThemes.themes(isDarkMode)[selectedThemeName.lowercase()]!!
+                        )
                     }
 
                     Dropdown(

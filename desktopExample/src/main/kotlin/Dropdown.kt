@@ -36,36 +36,32 @@ fun Dropdown(
     var isExpanded by remember { mutableStateOf(false) }
 
     Column(Modifier.padding(16.dp)) {
-        Surface {
-            DropdownMenu(
-                modifier = Modifier.background(Color.White),
-                expanded = isExpanded,
-                onDismissRequest = { isExpanded = false },
-            ) {
-                options.forEach { option ->
-                    DropdownMenuItem(
-                        modifier = Modifier,
-                        text = { Text(text = option) },
-                        onClick = {
-                            selectedOption = option
-                            onSelect(option)
-                            isExpanded = !isExpanded
-                        },
-                    )
-                }
-            }
-
-            Surface {
-                Text(
-                    text = selectedOption,
-                    textAlign = TextAlign.Center,
-                    modifier = modifier
-                        .clip(RoundedCornerShape(16.dp))
-                        .fillMaxWidth()
-                        .clickable { isExpanded = !isExpanded }
-                        .padding(8.dp),
+        DropdownMenu(
+            modifier = Modifier.background(Color.White),
+            expanded = isExpanded,
+            onDismissRequest = { isExpanded = false },
+        ) {
+            options.forEach { option ->
+                DropdownMenuItem(
+                    modifier = Modifier,
+                    text = { Text(text = option) },
+                    onClick = {
+                        selectedOption = option
+                        onSelect(option)
+                        isExpanded = !isExpanded
+                    },
                 )
             }
+
+            Text(
+                text = selectedOption,
+                textAlign = TextAlign.Center,
+                modifier = modifier
+                    .clip(RoundedCornerShape(16.dp))
+                    .fillMaxWidth()
+                    .clickable { isExpanded = !isExpanded }
+                    .padding(8.dp),
+            )
         }
     }
 }
