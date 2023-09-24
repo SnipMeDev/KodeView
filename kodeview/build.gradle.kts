@@ -56,7 +56,7 @@ kotlin {
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
                 // Share logic between submodules
-                api("dev.snipme:highlights:0.7.0")
+                api("dev.snipme:highlights:0.7.1")
             }
         }
         val commonTest by getting {

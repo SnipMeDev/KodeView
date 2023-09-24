@@ -116,8 +116,6 @@ fun main() = application {
 
                     Spacer(modifier = Modifier.size(16.dp))
 
-                    // TODO "" breaks Highlights
-
                     Text("Edit this...")
                     CodeEditText(
                         highlights = highlights,
