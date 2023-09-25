@@ -31,11 +31,17 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Text("KodeView")
+            
             Divider()
+            
             CodeTextView(newHighlights: $highlights)
                 .ignoresSafeArea(.keyboard)
                 .padding()
+            
             Divider()
+            
+            CodeEditText()
+            
             DropdownMenu(
                 values: getThemeNames(themes: themes),
                 defaultSelection: getThemeNames(themes: themes)

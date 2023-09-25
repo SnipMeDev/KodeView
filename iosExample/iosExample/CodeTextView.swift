@@ -23,7 +23,7 @@ struct CodeTextView: UIViewControllerRepresentable {
     }
 
     func updateUIViewController(_ wrapper: UIViewController, context: Context) {
-        let kotlinController = HighlightsViewKt.CodeTextViewUiViewController(highlights: highlights)
+        let kotlinController = KodeViewKt.codeTextView(highlights: highlights)
         // Cleanup
         kotlinController.removeFromParent()
         kotlinController.view.removeFromSuperview()

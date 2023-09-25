@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		832850392AC21D9200B0A7EE /* CodeEditText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832850382AC21D9100B0A7EE /* CodeEditText.swift */; };
 		83FF2D2E2A1A16AE001AEED3 /* iosExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FF2D2D2A1A16AE001AEED3 /* iosExampleApp.swift */; };
 		83FF2D302A1A16AE001AEED3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FF2D2F2A1A16AE001AEED3 /* ContentView.swift */; };
 		83FF2D322A1A16AF001AEED3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83FF2D312A1A16AF001AEED3 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		832850382AC21D9100B0A7EE /* CodeEditText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditText.swift; sourceTree = "<group>"; };
 		83FF2D2A2A1A16AE001AEED3 /* iosExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83FF2D2D2A1A16AE001AEED3 /* iosExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosExampleApp.swift; sourceTree = "<group>"; };
 		83FF2D2F2A1A16AE001AEED3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				83FF2D342A1A16AF001AEED3 /* Preview Content */,
 				83FF2D582A1A16D4001AEED3 /* DropdownMenu.swift */,
 				83FF2D5A2A1A170E001AEED3 /* CodeTextView.swift */,
+				832850382AC21D9100B0A7EE /* CodeEditText.swift */,
 			);
 			path = iosExample;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83FF2D5B2A1A170E001AEED3 /* CodeTextView.swift in Sources */,
+				832850392AC21D9200B0A7EE /* CodeEditText.swift in Sources */,
 				83FF2D302A1A16AE001AEED3 /* ContentView.swift in Sources */,
 				83FF2D2E2A1A16AE001AEED3 /* iosExampleApp.swift in Sources */,
 				83FF2D592A1A16D4001AEED3 /* DropdownMenu.swift in Sources */,
