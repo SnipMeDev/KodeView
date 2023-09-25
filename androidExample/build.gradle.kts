@@ -3,6 +3,7 @@ plugins {
     id(libs.plugins.android.application.get().pluginId)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.compose)
 }
 
 android {
@@ -50,12 +51,11 @@ dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     // Compose
-    val composeBom = platform("androidx.compose:compose-bom:2023.03.00")
-    implementation(composeBom)
     implementation("androidx.activity:activity-compose:1.7.2")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation(compose.runtime)
+    implementation(compose.foundation)
+    implementation(compose.material)
+    implementation(compose.ui)
+    implementation(compose.materialIconsExtended)
     implementation(libs.kodeview)
 }
