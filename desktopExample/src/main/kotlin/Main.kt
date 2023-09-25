@@ -97,14 +97,12 @@ fun main() = application {
 
                     Spacer(Modifier.height(16.dp))
 
-                    Surface {
-                        Text(
-                            modifier = Modifier.fillMaxWidth(),
-                            text = "KodeView",
-                            fontSize = 18.sp,
-                            textAlign = TextAlign.Center,
-                        )
-                    }
+                    Text(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = "KodeView",
+                        fontSize = 18.sp,
+                        textAlign = TextAlign.Center,
+                    )
 
                     Spacer(modifier = Modifier.size(16.dp))
 
@@ -145,6 +143,8 @@ fun main() = application {
                             SyntaxThemes.themes(isDarkMode)[selectedThemeName.lowercase()]!!
                         )
                     }
+
+                    Spacer(modifier = Modifier.size(16.dp))
 
                     Dropdown(
                         options = SyntaxLanguage.getNames(),
