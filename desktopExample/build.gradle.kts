@@ -5,7 +5,6 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":kodeview"))
     implementation(compose.runtime)
     implementation(compose.foundation)
     implementation(compose.material)

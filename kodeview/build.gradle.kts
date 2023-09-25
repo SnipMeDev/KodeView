@@ -146,6 +146,15 @@ publishing {
     }
 }
 
+tasks.withType<PublishToMavenLocal> {
+    dependsOn(":kodeview:signIosSimulatorArm64Publication")
+    dependsOn(":kodeview:signIosArm64Publication")
+    dependsOn(":kodeview:signIosX64Publication")
+    dependsOn(":kodeview:signJvmPublication")
+    dependsOn(":kodeview:signJsPublication")
+    dependsOn(":kodeview:signKotlinMultiplatformPublication")
+}
+
 tasks.withType<PublishToMavenRepository> {
     dependsOn(":kodeview:signIosSimulatorArm64Publication")
     dependsOn(":kodeview:signIosArm64Publication")
