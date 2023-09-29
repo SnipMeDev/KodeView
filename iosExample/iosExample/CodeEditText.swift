@@ -8,6 +8,7 @@
 import SwiftUI
 import kodeview
 
+// TODO Handle callback and stylize edit text field
 struct CodeEditText: UIViewControllerRepresentable {
     @Binding private var highlights: Highlights
 

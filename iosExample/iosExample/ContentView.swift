@@ -37,7 +37,7 @@ struct ContentView: View {
             
             Divider()
             
-            CodeEditText()
+            CodeEditText(newHighlights: $highlights)
             
             DropdownMenu(
                 values: getThemeNames(themes: themes),
@@ -65,9 +65,9 @@ struct ContentView: View {
         }
     }
 
-//    func getThemeNames(themes: Dictionary<String, SyntaxTheme>) -> Array<String> {
-//        return themes.keys.map { $0.description }.sorted()
-//    }
+    func getThemeNames(themes: Dictionary<String, SyntaxTheme>) -> Array<String> {
+        return themes.keys.map { $0.description }.sorted()
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {

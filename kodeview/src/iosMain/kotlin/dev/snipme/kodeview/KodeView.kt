@@ -13,6 +13,7 @@ fun codeTextView(
     )
 }
 
+// TODO Add other fields to customize
 fun codeEditText(
     highlights: Highlights,
     onValueChange: (String) -> Unit,
