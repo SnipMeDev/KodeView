@@ -6,15 +6,31 @@
 //
 
 import SwiftUI
+import kodeview
 
 struct CodeEditText: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> some UIViewController {
-        return KodeViewKt.codeEditText(highlights: Highlights.Builder(code: String, language: HighlightsSyntaxLanguage.default(), theme: HighlightsSyntaxTheme, emphasisLocations: [HighlightsPhraseLocation]))
-    }
-}
+    @Binding private var highlights: Highlights
 
-struct CodeEditText_Previews: PreviewProvider {
-    static var previews: some View {
-        CodeEditText()
+    init(newHighlights: Binding<Highlights>) {
+        self._highlights = newHighlights
+    }
+
+    func makeUIViewController(context: Context) -> UIViewController {
+        return UIViewController()
+    }
+
+    func updateUIViewController(_ wrapper: UIViewController, context: Context) {
+        let kotlinController = KodeViewKt.codeEditText(highlights: highlights) { String in
+            // TODO FINISH
+        }
+        // Cleanup
+        kotlinController.removeFromParent()
+        kotlinController.view.removeFromSuperview()
+        // Update view
+        wrapper.addChild(kotlinController)
+        wrapper.view.addSubview(kotlinController.view)
+        // Match with frame
+        kotlinController.view.frame = wrapper.view.frame
+        kotlinController.didMove(toParent: wrapper)
     }
 }

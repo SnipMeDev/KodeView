@@ -1,6 +1,5 @@
 package dev.snipme.kodeview
 
-import androidx.compose.ui.main.DefaultIOSAppDelegate
 import androidx.compose.ui.window.ComposeUIViewController
 import dev.snipme.highlights.Highlights
 import dev.snipme.kodeview.view.CodeEditText
@@ -14,12 +13,12 @@ fun codeTextView(
     )
 }
 
-// TODO Finish
 fun codeEditText(
     highlights: Highlights,
+    onValueChange: (String) -> Unit,
 ) = ComposeUIViewController {
     CodeEditText(
-        onValueChange = {},
+        onValueChange = onValueChange,
         highlights = highlights
     )
 }

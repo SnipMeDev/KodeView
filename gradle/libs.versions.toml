@@ -7,7 +7,7 @@ kotlinCompilerExtensionVersion = "1.5.3"
 kotlinAndroid = "1.9.10"
 kotlinMultiplatform = "1.9.10"
 compose = "1.5.10-beta01"
-androidLibrary = "8.0.0"
+androidLibrary = "8.1.1"
 kodeview = "0.6.0"
 
 [libraries]

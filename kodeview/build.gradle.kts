@@ -26,7 +26,7 @@ kotlin {
         browser()
     }
 
-    android {
+    androidTarget {
         compilations.all {
             kotlinOptions {
                 jvmTarget = libs.versions.jvmTarget.get()
@@ -40,6 +40,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
+            export("dev.snipme:highlights:0.7.1")
             baseName = "kodeview"
             isStatic = true
         }

@@ -8,9 +8,6 @@
 import SwiftUI
 import kodeview
 
-// Omit KMM library prefixing
-typealias Highlights = HighlightsHighlights
-
 struct CodeTextView: UIViewControllerRepresentable {
     @Binding private var highlights: Highlights
 

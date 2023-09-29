@@ -8,9 +8,6 @@
 import SwiftUI
 import kodeview
 
-typealias SyntaxLanguage = HighlightsSyntaxLanguage
-typealias SyntaxTheme = HighlightsSyntaxTheme
-
 struct ContentView: View {
     @State var highlights = Highlights.companion.default()
     private let themes = Highlights.companion.themes(darkMode: false)
@@ -68,9 +65,9 @@ struct ContentView: View {
         }
     }
 
-    func getThemeNames(themes: Dictionary<String, SyntaxTheme>) -> Array<String> {
-        return themes.keys.map { $0.description }.sorted()
-    }
+//    func getThemeNames(themes: Dictionary<String, SyntaxTheme>) -> Array<String> {
+//        return themes.keys.map { $0.description }.sorted()
+//    }
 }
 
 struct ContentView_Previews: PreviewProvider {
