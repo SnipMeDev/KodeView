@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.multiplatform)
@@ -42,21 +40,9 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-//            export(compose.runtime)
-//            export(compose.foundation)
-//            export(compose.material)
-//            export(compose.ui)
-            export("dev.snipme:highlights:0.7.1")
+            // TODO Try to export Highlights with Kotlin 1.9.20
             baseName = "kodeview"
             isStatic = true
-        }
-    }
-
-    targets.configureEach {
-        if (this is KotlinNativeTarget) {
-            compilations.configureEach {
-                kotlinOptions.freeCompilerArgs += listOf("-Xlazy-ir-for-caches=disable")
-            }
         }
     }
 

@@ -8,57 +8,45 @@
 import SwiftUI
 import kodeview
 
+typealias SyntaxLanguage = HighlightsSyntaxLanguage
+typealias SyntaxTheme = HighlightsSyntaxTheme
+
 struct ContentView: View {
     @State var highlights = Highlights.companion.default()
     private let themes = Highlights.companion.themes(darkMode: false)
     private let languages = SyntaxLanguage.companion.getNames()
-    
-        init() {
-            highlights.setCode(code:
-                    """
-                    class Main {
-                        public static void main(String[] args) {
-                            int abcd = 100;
-                        }
+
+    init() {
+        highlights.setCode(code:
+                """
+                class Main {
+                    public static void main(String[] args) {
+                        int abcd = 100;
                     }
-                    """
-            )
-        }
+                }
+                """
+        )
+    }
     
     var body: some View {
         VStack {
             Text("KodeView")
-            
             Divider()
-            
-            UiTextView()
-            
-//             ExampleKt.someText()
-            
-//                         CodeTextView(newHighlights: $highlights)
-//                             .ignoresSafeArea(.keyboard)
-//                             .padding()
-            
+            CodeTextView(newHighlights: $highlights)
+                .ignoresSafeArea(.keyboard)
+                .padding()
             Divider()
-            
-//                        CodeEditText(newHighlights: $highlights) { value in
-//                            $highlights.wrappedValue = highlights
-//                                .getBuilder()
-//                                .code(code: value)
-//                                .build()
-//                        }
-            
-                        DropdownMenu(
-                            values: getThemeNames(themes: themes),
-                            defaultSelection: getThemeNames(themes: themes)
-                                .firstIndex(of: highlights.getTheme().description()) ?? 0
-                        ) { selection in
-                            $highlights.wrappedValue = highlights
-                                .getBuilder()
-                                .theme(theme: themes[selection]!)
-                                .build()
-                        }
-            
+            DropdownMenu(
+                values: getThemeNames(themes: themes),
+                defaultSelection: getThemeNames(themes: themes)
+                    .firstIndex(of: highlights.getTheme().description()) ?? 0
+            ) { selection in
+                $highlights.wrappedValue = highlights
+                    .getBuilder()
+                    .theme(theme: themes[selection]!)
+                    .build()
+            }
+
             DropdownMenu(
                 values: languages,
                 defaultSelection:
@@ -73,12 +61,11 @@ struct ContentView: View {
             }
         }
     }
+
+    func getThemeNames(themes: Dictionary<String, SyntaxTheme>) -> Array<String> {
+        return themes.keys.map { $0.description }.sorted()
+    }
 }
-        
-            func getThemeNames(themes: Dictionary<String, SyntaxTheme>) -> Array<String> {
-                return themes.keys.map { $0.description }.sorted()
-            }
-    
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
