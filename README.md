@@ -21,11 +21,12 @@ repositories {
 ```
 
 ```shell
-implementation("dev.snipme:kodeview:0.5.0")
+implementation("dev.snipme:kodeview:0.6.0")
 ```
 
 ## Features ✨
-- CodeTextView UI view
+- CodeTextView
+- CodeEditText
 - Code component analysis (Keyword, comment, etc.)
 - Multiple syntax languages (Java, Swift, Kotlin, C, ...)
 - Themes
@@ -41,7 +42,7 @@ If you feel that any of our project has saved you a time or effort, then conside
 ## Components 🧩
 
 ### CodeTextView
-The basic component that takes instance of Highlights and applies coloring on a text.
+Basic component that takes instance of Highlights and applies coloring on a text.
 
 ```kotlin
 @Composable
@@ -49,9 +50,7 @@ fun MyApp() {
     val highlights = remember {
         mutableStateOf(
             Highlights
-                .default()
-                .getBuilder()
-                .code("public static void main(String[] args) {}")
+                .Builder(code = "public static void main(String[] args) {}")
                 .build()
         )
     }
@@ -64,6 +63,38 @@ fun MyApp() {
 }
 ```
 
+### CodeEditText
+With this component, you can update your via `onValueChange` callback.
+The Highlights library is ready for incremental updates, so change code anytime.
+The view customization is available like for the `TextField()`. 
+
+```kotlin
+@Composable
+fun MyApp() {
+    val highlights = remember {
+        mutableStateOf(
+            Highlights
+                .Builder(code = "public static void main(String[] args) {}")
+                .build()
+        )
+    }
+
+   MaterialTheme {
+      Column {
+          CodeEditText(
+              highlights = highlights.value,
+              onValueChange = { textValue ->
+                  highlights.value = highlights.value.getBuilder()
+                      .code(textValue)
+                      .build()
+              },
+              colors = ...,
+          )
+      }
+   }
+}
+```
+
 ## Run examples 🏎️
 
 Not all examples can be executed from command line, so recommended way is to use pre-created configurations:
@@ -71,7 +102,7 @@ Not all examples can be executed from command line, so recommended way is to use
 <img width="270" alt="iShot_2023-09-18_08 19 44" src="https://github.com/SnipMeDev/KodeView/assets/8405055/be660f49-5a77-445e-a717-6aaec9b5c28a">
 
 ## TODO 🚧
-- [ ] CodeEditText
+- [X] CodeEditText
 
 ## Contribution 💻
 Any form of support is very welcomed. 
