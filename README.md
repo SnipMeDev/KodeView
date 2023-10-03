@@ -64,9 +64,9 @@ fun MyApp() {
 ```
 
 ### CodeEditText
-With this component, you can update your via `onValueChange` callback.
-The Highlights library is ready for incremental updates, so change code anytime.
-The view customization is available like for the `TextField()`. 
+With this component, you can update your code via `onValueChange` callback.  
+The Highlights library is ready for incremental updates, so change values anytime.  
+The view bases on `TextField()`, and all it's fields are available for customization.  
 
 ```kotlin
 @Composable
@@ -88,7 +88,8 @@ fun MyApp() {
                       .code(textValue)
                       .build()
               },
-              colors = ...,
+              // Customize view's style
+              colors = TextFieldDefaults.textFieldColors(),
           )
       }
    }
