@@ -11,8 +11,8 @@ pluginManagement {
 
     plugins {
         val kotlinVersion = "1.9.10"
-        val agpVersion = "8.0.0"
-        val composeVersion = "1.5.1"
+        val agpVersion = "8.1.1"
+        val composeVersion = "1.5.2"
 
         kotlin("jvm").version(kotlinVersion)
         kotlin("multiplatform").version(kotlinVersion)

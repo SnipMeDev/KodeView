@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "dev.snipme"
-version = "0.5.0"
+version = "0.6.0"
 
 android {
     namespace = "dev.snipme.kodeview"
@@ -26,7 +26,7 @@ kotlin {
         browser()
     }
 
-    android {
+    androidTarget {
         compilations.all {
             kotlinOptions {
                 jvmTarget = libs.versions.jvmTarget.get()
@@ -40,6 +40,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
+            // TODO Try to export Highlights with Kotlin 1.9.20
             baseName = "kodeview"
             isStatic = true
         }
@@ -56,7 +57,7 @@ kotlin {
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
                 // Share logic between submodules
-                api("dev.snipme:highlights:0.6.0")
+                api("dev.snipme:highlights:0.7.1")
             }
         }
         val commonTest by getting {
@@ -144,6 +145,15 @@ publishing {
             }
         }
     }
+}
+
+tasks.withType<PublishToMavenLocal> {
+    dependsOn(":kodeview:signIosSimulatorArm64Publication")
+    dependsOn(":kodeview:signIosArm64Publication")
+    dependsOn(":kodeview:signIosX64Publication")
+    dependsOn(":kodeview:signJvmPublication")
+    dependsOn(":kodeview:signJsPublication")
+    dependsOn(":kodeview:signKotlinMultiplatformPublication")
 }
 
 tasks.withType<PublishToMavenRepository> {

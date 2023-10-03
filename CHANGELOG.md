@@ -1,24 +1,47 @@
+## [0.6.0]
+
+### Added
+
+- CodeEditText view
+- Theme switcher in examples
+- Code edit README sample code
+
+### Changed
+
+- Android example
+- Desktop example
+- Web example
+- Highlights library export for iOS framework
+- Highlights library version to 0.7.1
+
+### Removed
+
+- Material3 references
+
 ## [0.5.0]
 
 ### Added
+
 - Maven publication
 
 ### Changed
+
 - README sections
 - KodeView dependency import style
 
 ## [0.4.0]
 
 ### Added
+
 - Maven local publication
 
 ### Changed
+
 - KodeView import model 
 
 ## [0.3.1]
 
 ### Added
-
 - Web section to README
 
 ## [0.3.0]
