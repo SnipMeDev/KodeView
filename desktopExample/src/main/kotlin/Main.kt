@@ -114,7 +114,6 @@ fun main() = application {
 
                     Spacer(modifier = Modifier.size(16.dp))
 
-                    // TODO Fix dark mode
                     Text("Edit this...")
                     CodeEditText(
                         highlights = highlights,
