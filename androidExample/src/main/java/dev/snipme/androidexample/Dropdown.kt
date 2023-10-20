@@ -4,9 +4,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.DropdownMenu
-import androidx.compose.material.DropdownMenuItem
-import androidx.compose.material.Text
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,14 +36,14 @@ fun Dropdown(
     ) {
         options.forEach { option ->
             DropdownMenuItem(
+                text = { Text(text = option) },
                 onClick = {
                     selectedOption = option
                     onSelect(option)
                     isExpanded = !isExpanded
                 },
-            ) { Text(text = option) }
+            )
         }
-
     }
 
     Text(
