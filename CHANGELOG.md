@@ -1,3 +1,14 @@
+## [0.7.0]
+
+### Added
+
+- CodeEditText material3 variant
+
+### Changed
+
+- CodeTextView surface and text to material3 
+- All examples to use material3 for theming
+
 ## [0.6.0]
 
 ### Added
