@@ -1,12 +1,12 @@
 [versions]
 jvmTarget = "1.8"
 gradlePlugin = "8.1.0"
-kotlin = "1.9.10"
+kotlin = "1.9.21"
 ksp = "1.8.10-1.0.9"
 kotlinCompilerExtensionVersion = "1.5.3"
-kotlinAndroid = "1.9.10"
-kotlinMultiplatform = "1.9.10"
-compose = "1.5.2"
+kotlinAndroid = "1.9.21"
+kotlinMultiplatform = "1.9.21"
+compose = "1.5.11"
 androidLibrary = "8.1.1"
 kodeview = "0.7.0"
 

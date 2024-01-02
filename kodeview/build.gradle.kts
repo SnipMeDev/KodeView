@@ -46,6 +46,8 @@ kotlin {
         }
     }
 
+    applyDefaultHierarchyTemplate()
+
     sourceSets {
         // Common
         val commonMain by getting {
@@ -66,24 +68,24 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        // Android
-        val androidMain by getting {
-            dependencies {
-                implementation("androidx.activity:activity-compose:1.7.2")
-                implementation("androidx.appcompat:appcompat:1.6.1")
-                implementation("androidx.core:core-ktx:1.12.0")
-            }
-        }
-        // iOS
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by creating {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
-        }
+//        // Android
+//        val androidMain by getting {
+//            dependencies {
+//                implementation("androidx.activity:activity-compose:1.8.2")
+//                implementation("androidx.appcompat:appcompat:1.6.1")
+//                implementation("androidx.core:core-ktx:1.12.0")
+//            }
+//        }
+//        // iOS
+//        val iosX64Main by getting
+//        val iosArm64Main by getting
+//        val iosSimulatorArm64Main by getting
+//        val iosMain by creating {
+//            dependsOn(commonMain)
+//            iosX64Main.dependsOn(this)
+//            iosArm64Main.dependsOn(this)
+//            iosSimulatorArm64Main.dependsOn(this)
+//        }
     }
 }
 
