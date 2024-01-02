@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "dev.snipme"
-version = "0.7.0"
+version = "0.8.0"
 
 android {
     namespace = "dev.snipme.kodeview"
@@ -40,9 +40,9 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            // TODO Try to export Highlights with Kotlin 1.9.20
             baseName = "kodeview"
             isStatic = true
+            export(libs.highlights)
         }
     }
 
@@ -60,7 +60,7 @@ kotlin {
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
                 // Share logic between submodules
-                api("dev.snipme:highlights:0.7.1")
+                api(libs.highlights)
             }
         }
         val commonTest by getting {
@@ -68,24 +68,6 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-//        // Android
-//        val androidMain by getting {
-//            dependencies {
-//                implementation("androidx.activity:activity-compose:1.8.2")
-//                implementation("androidx.appcompat:appcompat:1.6.1")
-//                implementation("androidx.core:core-ktx:1.12.0")
-//            }
-//        }
-//        // iOS
-//        val iosX64Main by getting
-//        val iosArm64Main by getting
-//        val iosSimulatorArm64Main by getting
-//        val iosMain by creating {
-//            dependsOn(commonMain)
-//            iosX64Main.dependsOn(this)
-//            iosArm64Main.dependsOn(this)
-//            iosSimulatorArm64Main.dependsOn(this)
-//        }
     }
 }
 

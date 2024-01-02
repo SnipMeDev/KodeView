@@ -8,9 +8,6 @@
 import SwiftUI
 import kodeview
 
-typealias SyntaxLanguage = HighlightsSyntaxLanguage
-typealias SyntaxTheme = HighlightsSyntaxTheme
-
 struct ContentView: View {
     @State var highlights = Highlights.companion.default()
     private let themes = Highlights.companion.themes(darkMode: false)

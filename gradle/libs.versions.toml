@@ -9,9 +9,11 @@ kotlinMultiplatform = "1.9.21"
 compose = "1.5.11"
 androidLibrary = "8.1.1"
 kodeview = "0.7.0"
+highlights = "0.7.1"
 
 [libraries]
 kodeview = { group = "dev.snipme", name = "kodeview", version.ref = "kodeview" }
+highlights = { group = "dev.snipme", name = "highlights", version.ref = "highlights" }
 
 [plugins]
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
