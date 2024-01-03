@@ -20,15 +20,16 @@ struct CodeTextView: UIViewControllerRepresentable {
     }
 
     func updateUIViewController(_ wrapper: UIViewController, context: Context) {
-        let kotlinController = HighlightsViewKt.CodeTextViewUiViewController(highlights: highlights)
-        // Cleanup
-        kotlinController.removeFromParent()
-        kotlinController.view.removeFromSuperview()
-        // Update view
-        wrapper.addChild(kotlinController)
-        wrapper.view.addSubview(kotlinController.view)
-        // Match with frame
-        kotlinController.view.frame = wrapper.view.frame
-        kotlinController.didMove(toParent: wrapper)
+    //TODO Update values on text change!
+        let kotlinController = CodeTextViewIos.shared.uiViewController(highlights: highlights)
+         // Cleanup
+         kotlinController.removeFromParent()
+         kotlinController.view.removeFromSuperview()
+         // Update view
+         wrapper.addChild(kotlinController)
+         wrapper.view.addSubview(kotlinController.view)
+         // Match with frame
+         kotlinController.view.frame = wrapper.view.frame
+         kotlinController.didMove(toParent: wrapper)
     }
 }

@@ -34,7 +34,7 @@ private const val TAB_LENGTH = 4
 private const val TAB_CHAR = "\t"
 
 @Composable
-fun CodeEditText(
+fun CodeEditTextLegacyMaterial(
     highlights: Highlights,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,

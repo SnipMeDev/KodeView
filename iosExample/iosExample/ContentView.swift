@@ -33,6 +33,10 @@ struct ContentView: View {
                 .ignoresSafeArea(.keyboard)
                 .padding()
             Divider()
+            CodeEditText(newHighlights: $highlights)
+                .ignoresSafeArea(.keyboard)
+                .padding()
+            Divider()
             DropdownMenu(
                 values: getThemeNames(themes: themes),
                 defaultSelection: getThemeNames(themes: themes)
