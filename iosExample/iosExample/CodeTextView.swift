@@ -20,7 +20,6 @@ struct CodeTextView: UIViewControllerRepresentable {
     }
 
     func updateUIViewController(_ wrapper: UIViewController, context: Context) {
-    //TODO Update values on text change!
         let kotlinController = CodeTextViewIos.shared.uiViewController(highlights: highlights)
          // Cleanup
          kotlinController.removeFromParent()

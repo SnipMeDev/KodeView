@@ -18,6 +18,9 @@ android {
         minSdk = 21
     }
 }
+dependencies {
+    implementation(libs.compose.material)
+}
 
 kotlin {
     jvm()
