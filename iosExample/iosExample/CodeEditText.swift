@@ -1,18 +1,23 @@
 //
-//  CodeTextView.swift
+//  CodeEditText.swift
 //  iosExample
 //
-//  Created by Tomasz Kądziołka on 21/05/2023.
+//  Created by Tomasz Kądziołka on 03/01/2024.
 //
 
 import SwiftUI
 import kodeview
 
-struct CodeTextView: UIViewControllerRepresentable {
+struct CodeEditText: UIViewControllerRepresentable {
     @Binding private var highlights: Highlights
+    private var onValueChange: (String) -> Void
 
-    init(newHighlights: Binding<Highlights>) {
+    init(
+        newHighlights: Binding<Highlights>,
+        onValueChange: @escaping (String) -> Void
+    ) {
         self._highlights = newHighlights
+        self.onValueChange = onValueChange
     }
 
     func makeUIViewController(context: Context) -> UIViewController {
@@ -20,7 +25,12 @@ struct CodeTextView: UIViewControllerRepresentable {
     }
 
     func updateUIViewController(_ wrapper: UIViewController, context: Context) {
-        let kotlinController = CodeTextViewIos.shared.uiViewController(highlights: highlights)
+         let kotlinController = CodeEditTextIos.shared.uiViewController(
+             highlights: highlights,
+             onValueChange: { value in
+                 onValueChange(value.text)
+             }
+         )
          // Cleanup
          kotlinController.removeFromParent()
          kotlinController.view.removeFromSuperview()

@@ -1,7 +1,7 @@
 ![kodeview_banner_opaque](https://github.com/SnipMeDev/KodeView/assets/8405055/59c6a2af-1b32-4a02-998f-ecae2296363a)
 
 [![Maven Central](https://img.shields.io/maven-central/v/dev.snipme/kodeview)](https://mvnrepository.com/artifact/dev.snipme)
-[![Kotlin](https://img.shields.io/badge/kotlin-1.9.10-blue.svg?logo=kotlin)](http://kotlinlang.org)
+[![Kotlin](https://img.shields.io/badge/kotlin-1.9.21-blue.svg?logo=kotlin)](http://kotlinlang.org)
 [![GitHub License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
 # KodeView
@@ -21,7 +21,7 @@ repositories {
 ```
 
 ```shell
-implementation("dev.snipme:kodeview:0.7.0")
+implementation("dev.snipme:kodeview:0.8.0")
 ```
 
 ## Features ✨
