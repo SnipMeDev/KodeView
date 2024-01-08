@@ -4,9 +4,12 @@
 - CodeEditText component for SwiftUI
 
 ### Changed
+- Kotlin version to 1.9.21
 - Material3 CodeEditText location to a material3 subpackage for better distinction
 - Highlights naming in iOS project thanks to library export
-- ios example project
+- iOS example project
+- Libs cache to incremental
+- Dependency structure to new pattern 
 
 ## [0.7.0]
 

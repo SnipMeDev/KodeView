@@ -10,7 +10,6 @@ import kodeview
 
 struct ContentView: View {
     @State var highlights = Highlights.companion.default()
-    @State var selection: Int64 = 0
     private let themes = Highlights.companion.themes(darkMode: false)
     private let languages = SyntaxLanguage.companion.getNames()
 
