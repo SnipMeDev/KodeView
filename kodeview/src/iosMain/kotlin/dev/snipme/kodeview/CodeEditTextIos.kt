@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.window.ComposeUIViewController
 import dev.snipme.highlights.Highlights
-import dev.snipme.kodeview.view.CodeEditTextSwiftUi
+import dev.snipme.kodeview.view.material3.CodeEditTextSwiftUi
 
 object CodeEditTextIos {
     fun uiViewController(

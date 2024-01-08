@@ -31,7 +31,7 @@ import dev.snipme.highlights.model.SyntaxLanguage
 import dev.snipme.highlights.model.SyntaxTheme
 import dev.snipme.highlights.model.SyntaxThemes
 import dev.snipme.highlights.model.SyntaxThemes.useDark
-import dev.snipme.kodeview.view.CodeEditText
+import dev.snipme.kodeview.view.material3.CodeEditText
 import dev.snipme.kodeview.view.CodeTextView
 
 private val windowSize = 600.dp

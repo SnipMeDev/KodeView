@@ -1,3 +1,13 @@
+## [0.8.0]
+
+### Added
+- CodeEditText component for SwiftUI
+
+### Changed
+- Material3 CodeEditText location to a material3 subpackage for better distinction
+- Highlights naming in iOS project thanks to library export
+- ios example project
+
 ## [0.7.0]
 
 ### Added
