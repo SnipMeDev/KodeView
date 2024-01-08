@@ -21,7 +21,7 @@ repositories {
 ```
 
 ```shell
-implementation("dev.snipme:kodeview:0.7.0")
+implementation("dev.snipme:kodeview:0.8.0")
 ```
 
 ## Features ✨
