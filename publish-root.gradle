@@ -8,7 +8,7 @@ ext["sonatypeStagingProfileId"] = ''
 
 // Read local.properties file first if it exists
 Properties p = new Properties()
-p.load(new FileInputStream("local.properties"))
+new FileInputStream("local.properties").withCloseable { is -> p.load(is) }
 p.each { name, value -> ext[name] = value }
 
 // Set up Sonatype repository
