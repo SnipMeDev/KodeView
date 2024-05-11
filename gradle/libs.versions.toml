@@ -9,7 +9,7 @@ kotlinMultiplatform = "1.9.21"
 compose = "1.5.11"
 androidLibrary = "8.1.1"
 kodeview = "0.8.0"
-highlights = "0.7.1"
+highlights = "0.9.0"
 composeMaterial = "1.2.1"
 
 [libraries]

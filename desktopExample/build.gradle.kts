@@ -14,7 +14,8 @@ dependencies {
     @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
     implementation(compose.components.resources)
     implementation(compose.desktop.currentOs)
-    implementation(libs.kodeview)
+    // local module kodeview
+    implementation(project(":kodeview"))
 }
 
 compose.desktop {

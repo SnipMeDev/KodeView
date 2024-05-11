@@ -42,3 +42,12 @@ internal fun AnnotatedString.Builder.generateAnnotatedString(highlights: Highlig
             )
         }
 }
+
+internal fun String.generateWithLineNumbers(): String {
+    val lines = this.split("\n")
+    val maxLineNumber = lines.size.toString().length
+    return lines.mapIndexed { index, line ->
+        val lineNumber = (index + 1).toString().padStart(maxLineNumber, ' ')
+        "$lineNumber | $line"
+    }.joinToString("\n")
+}

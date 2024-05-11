@@ -18,7 +18,7 @@ kotlin {
                 implementation(compose.material)
                 implementation(compose.material3)
                 implementation(compose.materialIconsExtended)
-                implementation(libs.kodeview)
+                implementation(project(":kodeview"))
             }
         }
     }

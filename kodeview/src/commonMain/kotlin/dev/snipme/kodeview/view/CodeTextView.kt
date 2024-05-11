@@ -9,9 +9,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextGeometricTransform
 import dev.snipme.highlights.Highlights
 import dev.snipme.highlights.model.BoldHighlight
 import dev.snipme.highlights.model.ColorHighlight
+import dev.snipme.highlights.model.PhraseLocation
+import generateWithLineNumbers
 
 @Composable
 fun CodeTextView(
@@ -26,6 +29,14 @@ fun CodeTextView(
 
                 highlights.getHighlights()
                     .filterIsInstance<ColorHighlight>()
+                    .map {
+                        it.copy(
+                            location = PhraseLocation(
+                                start = it.location.start + 4,
+                                end = it.location.end + 4,
+                            )
+                        )
+                    }
                     .forEach {
                         addStyle(
                             SpanStyle(color = Color(it.rgb).copy(alpha = 1f)),
@@ -36,6 +47,14 @@ fun CodeTextView(
 
                 highlights.getHighlights()
                     .filterIsInstance<BoldHighlight>()
+                    .map {
+                        it.copy(
+                            location = PhraseLocation(
+                                start = it.location.start + 4,
+                                end = it.location.end + 4,
+                            )
+                        )
+                    }
                     .forEach {
                         addStyle(
                             SpanStyle(fontWeight = FontWeight.Bold),
@@ -43,6 +62,14 @@ fun CodeTextView(
                             end = it.location.end,
                         )
                     }
+
+                addStyle(
+                    SpanStyle(textGeometricTransform = TextGeometricTransform(
+                        skewX = 0.1f,
+                    )),
+                    start = 0,
+                    end = 4,
+                )
             })
     }
 }
