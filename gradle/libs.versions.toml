@@ -25,3 +25,4 @@ compose = { id = "org.jetbrains.compose", version.ref = "compose" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinAndroid" }
 android-application = { id = "com.android.application" }
 android-library = { id = "com.android.library", version.ref = "androidLibrary" }
+bcv = "org.jetbrains.kotlinx.binary-compatibility-validator:0.16.2"

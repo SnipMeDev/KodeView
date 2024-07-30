@@ -1,0 +1,13 @@
+public final class dev/snipme/kodeview/view/CodeEditTextKt {
+	public static final fun CodeEditText (Ldev/snipme/highlights/Highlights;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;ZZZLandroidx/compose/ui/text/TextStyle;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;ZLandroidx/compose/ui/text/input/VisualTransformation;Landroidx/compose/foundation/text/KeyboardOptions;Landroidx/compose/foundation/text/KeyboardActions;ZIILandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/ui/graphics/Shape;Landroidx/compose/material/TextFieldColors;Landroidx/compose/runtime/Composer;IIII)V
+}
+
+public final class dev/snipme/kodeview/view/CodeTextViewKt {
+	public static final fun CodeTextView (Landroidx/compose/ui/Modifier;Ldev/snipme/highlights/Highlights;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class dev/snipme/kodeview/view/material3/CodeEditTextKt {
+	public static final fun CodeEditText (Ldev/snipme/highlights/Highlights;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;ZZZLandroidx/compose/ui/text/TextStyle;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;ZLandroidx/compose/ui/text/input/VisualTransformation;Landroidx/compose/foundation/text/KeyboardOptions;Landroidx/compose/foundation/text/KeyboardActions;ZIILandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/ui/graphics/Shape;Landroidx/compose/material3/TextFieldColors;Landroidx/compose/runtime/Composer;IIII)V
+	public static final fun CodeEditTextSwiftUi (Ldev/snipme/highlights/Highlights;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;ZZZLandroidx/compose/ui/text/TextStyle;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;ZLandroidx/compose/ui/text/input/VisualTransformation;Landroidx/compose/foundation/text/KeyboardOptions;Landroidx/compose/foundation/text/KeyboardActions;ZIILandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/ui/graphics/Shape;Landroidx/compose/material3/TextFieldColors;Landroidx/compose/runtime/Composer;IIII)V
+}
+

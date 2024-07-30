@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.multiplatform)
     alias(libs.plugins.android.library)
     alias(libs.plugins.compose)
+    alias(libs.plugins.bcv)
     id("maven-publish")
     id("signing")
 }
@@ -71,6 +72,13 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
+    }
+}
+
+apiValidation {
+    @OptIn(kotlinx.validation.ExperimentalBCVApi::class)
+    klib {
+        enabled = true
     }
 }
 
