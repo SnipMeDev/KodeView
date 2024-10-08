@@ -15,6 +15,7 @@ dependencies {
     implementation(compose.components.resources)
     implementation(compose.desktop.currentOs)
     implementation(libs.kodeview)
+    alias(libs.plugins.compose.compiler)
 }
 
 compose.desktop {

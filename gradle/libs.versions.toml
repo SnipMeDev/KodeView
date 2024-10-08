@@ -1,18 +1,24 @@
 [versions]
+activityCompose = "1.9.2"
+appcompat = "1.7.0"
+coreKtx = "1.13.1"
 jvmTarget = "1.8"
 gradlePlugin = "8.1.0"
-kotlin = "1.9.21"
+kotlin = "2.0.20"
 ksp = "1.8.10-1.0.9"
 kotlinCompilerExtensionVersion = "1.5.3"
-kotlinAndroid = "1.9.21"
-kotlinMultiplatform = "1.9.21"
-compose = "1.5.11"
-androidLibrary = "8.1.1"
+kotlinAndroid = "2.0.20"
+kotlinMultiplatform = "2.0.20"
+compose = "1.6.11"
+androidLibrary = "8.6.1"
 kodeview = "0.8.0"
 highlights = "0.7.1"
-composeMaterial = "1.2.1"
+composeMaterial = "1.4.0"
 
 [libraries]
+activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 kodeview = { group = "dev.snipme", name = "kodeview", version.ref = "kodeview" }
 highlights = { group = "dev.snipme", name = "highlights", version.ref = "highlights" }
 compose-material = { group = "androidx.wear.compose", name = "compose-material", version.ref = "composeMaterial" }
@@ -22,6 +28,7 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlinMultiplatform" }
 jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 compose = { id = "org.jetbrains.compose", version.ref = "compose" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinAndroid" }
 android-application = { id = "com.android.application" }
 android-library = { id = "com.android.library", version.ref = "androidLibrary" }
