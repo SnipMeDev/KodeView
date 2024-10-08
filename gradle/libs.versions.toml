@@ -4,6 +4,7 @@ appcompat = "1.7.0"
 coreKtx = "1.13.1"
 jvmTarget = "1.8"
 gradlePlugin = "8.1.0"
+
 kotlin = "2.0.20"
 ksp = "1.8.10-1.0.9"
 kotlinCompilerExtensionVersion = "1.5.3"
