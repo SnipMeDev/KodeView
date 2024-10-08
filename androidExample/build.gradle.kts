@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.compose)
+    alias(libs.plugins.compose.compiler)
+
 }
 
 android {
@@ -11,7 +13,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 25
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -48,10 +50,10 @@ android {
 
 dependencies {
     // Core
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation(libs.core.ktx)
+    implementation(libs.appcompat)
     // Compose
-    implementation("androidx.activity:activity-compose:1.8.2")
+    implementation(libs.activity.compose)
     implementation(compose.runtime)
     implementation(compose.foundation)
     implementation(compose.material)

@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.multiplatform)
     alias(libs.plugins.compose)
+    alias(libs.plugins.compose.compiler)
 }
 
 kotlin {
@@ -24,6 +25,3 @@ kotlin {
     }
 }
 
-compose.experimental {
-    web.application {}
-}
