@@ -8,6 +8,7 @@ gradlePlugin = "8.1.0"
 kotlin = "2.0.20"
 ksp = "1.8.10-1.0.9"
 kotlinCompilerExtensionVersion = "1.5.3"
+
 kotlinAndroid = "2.0.20"
 kotlinMultiplatform = "2.0.20"
 compose = "1.6.11"
