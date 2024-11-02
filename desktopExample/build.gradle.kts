@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.jvm)
     alias(libs.plugins.compose)
+    alias(libs.plugins.compose.compiler)
 }
 
 dependencies {
@@ -14,8 +15,7 @@ dependencies {
     @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
     implementation(compose.components.resources)
     implementation(compose.desktop.currentOs)
-    implementation(libs.kodeview)
-    alias(libs.plugins.compose.compiler)
+    implementation(project(":kodeview"))
 }
 
 compose.desktop {
