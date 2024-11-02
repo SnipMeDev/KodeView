@@ -3,19 +3,20 @@ plugins {
     alias(libs.plugins.multiplatform)
     alias(libs.plugins.android.library)
     alias(libs.plugins.compose)
+    alias(libs.plugins.compose.compiler)
     id("maven-publish")
     id("signing")
 }
 
 group = "dev.snipme"
-version = "0.8.0"
+version = "0.9.0"
 
 android {
     namespace = "dev.snipme.kodeview"
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 21
+        minSdk = 25
     }
 }
 dependencies {
