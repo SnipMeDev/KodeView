@@ -33,10 +33,22 @@ fun List<CodeHighlight>.generateAnnotatedString(code: String) =
     }
 
 
-internal fun TextFieldValue.calculateFieldPhraseUpdate(translateTabToSpaces: Boolean) =
+internal fun TextFieldValue.updateIndentations(translateTabToSpaces: Boolean) =
     if (translateTabToSpaces && text.contains(TAB_CHAR)) {
         val result = text.replace(TAB_CHAR, " ".repeat(TAB_LENGTH))
         this.copy(text = result, TextRange(selection.start + TAB_LENGTH - 1))
     } else {
         this
     }
+
+internal fun TextFieldValue.copySpanStyles(source: TextFieldValue) =
+    this.copy(
+        annotatedString = buildAnnotatedString {
+            append(text)
+            source.annotatedString.spanStyles.forEach {
+                if (it.start >= 0 && it.end > it.start && it.end < text.length) {
+                    addStyle(it.item, it.start, it.end)
+                }
+            }
+        }
+    )

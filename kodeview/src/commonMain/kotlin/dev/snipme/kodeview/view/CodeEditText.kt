@@ -18,7 +18,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
-import calculateFieldPhraseUpdate
+import updateIndentations
 import dev.snipme.highlights.Highlights
 
 @Composable
@@ -66,7 +66,7 @@ fun CodeEditText(
     TextField(
         modifier = modifier.fillMaxWidth(),
         onValueChange = {
-            val fieldUpdate = it.calculateFieldPhraseUpdate(translateTabToSpaces)
+            val fieldUpdate = it.updateIndentations(translateTabToSpaces)
             currentText.value = fieldUpdate
             onValueChange(fieldUpdate.text)
         },

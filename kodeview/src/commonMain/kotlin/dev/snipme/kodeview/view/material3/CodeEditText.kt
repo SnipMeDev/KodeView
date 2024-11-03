@@ -12,10 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
-import calculateFieldPhraseUpdate
+import copySpanStyles
+import updateIndentations
 import dev.snipme.highlights.DefaultHighlightsResultListener
 import dev.snipme.highlights.Highlights
 import dev.snipme.highlights.model.CodeHighlight
@@ -32,7 +32,7 @@ fun CodeEditText(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     readOnly: Boolean = false,
-    translateTabToSpaces: Boolean = true,
+    handleIndentations: Boolean = true,
     textStyle: TextStyle = LocalTextStyle3.current,
     label: @Composable (() -> Unit)? = null,
     placeholder: @Composable (() -> Unit)? = null,
@@ -67,32 +67,20 @@ fun CodeEditText(
         })
     }
 
+    fun onValueChange(change: TextFieldValue) {
+        val updated = change.updateIndentations(handleIndentations)
+        if (updated.text != currentText.value.text) {
+            onValueChange(updated.text)
+        }
+
+        currentText.value = updated.copySpanStyles(
+            currentText.value
+        )
+    }
+
     TextField3(
         modifier = modifier.fillMaxWidth(),
-        onValueChange = { change ->
-//            val fieldUpdate = it.calculateFieldPhraseUpdate(translateTabToSpaces)
-            if (change.text != currentText.value.text)
-                onValueChange(change.text)
-            currentText.value = change.copy(
-                annotatedString = buildAnnotatedString {
-                    append(change.text)
-
-                    currentText.value.annotatedString.spanStyles.forEach {
-                        try {
-                            if (it.start >= 0 && it.end > it.start && it.end <= change.text.length) {
-                                addStyle(
-                                    it.item,
-                                    maxOf(it.start, 0),
-                                    minOf(it.end, change.text.length - 1)
-                                )
-                            }
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                        }
-                    }
-                }
-            )
-        },
+        onValueChange = ::onValueChange,
         value = currentText.value,
         enabled = enabled,
         readOnly = readOnly,
@@ -156,7 +144,7 @@ fun CodeEditTextSwiftUi(
         modifier = modifier.fillMaxWidth(),
         value = currentText.value,
         onValueChange = {
-            val fieldUpdate = it.calculateFieldPhraseUpdate(translateTabToSpaces)
+            val fieldUpdate = it.updateIndentations(translateTabToSpaces)
             highlightsState.value =
                 highlightsState.value.getBuilder().code(fieldUpdate.text).build()
             onValueChange(fieldUpdate)
