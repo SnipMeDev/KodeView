@@ -1,3 +1,16 @@
+## [0.9.0]
+
+### Changed
+- minimum SDK to 25
+- Gradle to 8.9
+- Kotlin version to 2.0.20
+- Highlights library version to 1.0.0
+- `translateTabToSpaces` param name to `handleIndentations`
+- desktop example to support side by side view
+
+### Fixed
+- blocking main UI thread on input change
+
 ## [0.8.0]
 
 ### Added
