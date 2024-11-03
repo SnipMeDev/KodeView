@@ -18,8 +18,12 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
+import copySpanStyles
+import dev.snipme.highlights.DefaultHighlightsResultListener
 import updateIndentations
 import dev.snipme.highlights.Highlights
+import dev.snipme.highlights.model.CodeHighlight
+import generateAnnotatedString
 
 @Composable
 fun CodeEditText(
@@ -48,28 +52,35 @@ fun CodeEditText(
     val currentText = remember {
         mutableStateOf(
             TextFieldValue(
-                annotatedString = AnnotatedString(highlights.getCode())
+                AnnotatedString(highlights.getCode())
             )
         )
     }
 
     LaunchedEffect(highlights) {
-//        highlights.getHighlightsAsync(object : DefaultHighlightsResultListener() {
-//            override fun onSuccess(result: List<CodeHighlight>) {
-//                currentText.value = currentText.value.copy(
-//                    annotatedString = result.generateAnnotatedString(currentText.value.text),
-//                )
-//            }
-//        })
+        highlights.getHighlightsAsync(object : DefaultHighlightsResultListener() {
+            override fun onSuccess(result: List<CodeHighlight>) {
+                currentText.value = currentText.value.copy(
+                    annotatedString = result.generateAnnotatedString(currentText.value.text),
+                )
+            }
+        })
+    }
+
+    fun updateNewValue(change: TextFieldValue) {
+        val updated = change.updateIndentations(handleIndentations)
+        if (updated.text != currentText.value.text) {
+            onValueChange(updated.text)
+        }
+
+        currentText.value = updated.copySpanStyles(
+            currentText.value
+        )
     }
 
     TextField(
         modifier = modifier.fillMaxWidth(),
-        onValueChange = {
-            val fieldUpdate = it.updateIndentations(handleIndentations)
-            currentText.value = fieldUpdate
-            onValueChange(fieldUpdate.text)
-        },
+        onValueChange = ::updateNewValue,
         value = currentText.value,
         enabled = enabled,
         readOnly = readOnly,
