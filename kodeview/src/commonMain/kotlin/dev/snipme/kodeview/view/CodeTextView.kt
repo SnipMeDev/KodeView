@@ -33,9 +33,14 @@ fun CodeTextView(
             .generateAnnotatedString(highlights.getCode())
     }
 
-    Surface {
+    Surface(
+        modifier = modifier,
+        color = Color.Transparent
+    ) {
         Text(
-            modifier = modifier,
+            modifier = modifier
+                .verticalScroll(rememberScrollState())
+                .horizontalScroll(rememberScrollState()),
             text = textState
         )
     }
