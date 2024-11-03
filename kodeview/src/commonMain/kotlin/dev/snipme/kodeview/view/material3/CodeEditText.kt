@@ -15,8 +15,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
 import calculateFieldPhraseUpdate
 import dev.snipme.highlights.DefaultHighlightsResultListener
 import dev.snipme.highlights.Highlights
@@ -71,10 +69,29 @@ fun CodeEditText(
 
     TextField3(
         modifier = modifier.fillMaxWidth(),
-        onValueChange = {
-            val fieldUpdate = it.calculateFieldPhraseUpdate(translateTabToSpaces)
-            currentText.value = fieldUpdate
-            onValueChange(fieldUpdate.text)
+        onValueChange = { change ->
+//            val fieldUpdate = it.calculateFieldPhraseUpdate(translateTabToSpaces)
+            if (change.text != currentText.value.text)
+                onValueChange(change.text)
+            currentText.value = change.copy(
+                annotatedString = buildAnnotatedString {
+                    append(change.text)
+
+                    currentText.value.annotatedString.spanStyles.forEach {
+                        try {
+                            if (it.start >= 0 && it.end > it.start && it.end <= change.text.length) {
+                                addStyle(
+                                    it.item,
+                                    maxOf(it.start, 0),
+                                    minOf(it.end, change.text.length - 1)
+                                )
+                            }
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+                    }
+                }
+            )
         },
         value = currentText.value,
         enabled = enabled,
@@ -134,8 +151,6 @@ fun CodeEditTextSwiftUi(
             )
         )
     }
-
-
 
     TextField3(
         modifier = modifier.fillMaxWidth(),
