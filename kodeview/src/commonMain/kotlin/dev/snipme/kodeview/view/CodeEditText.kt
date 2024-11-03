@@ -9,17 +9,17 @@ import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldColors
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import calculateFieldPhraseUpdate
 import dev.snipme.highlights.Highlights
-import generateAnnotatedString
 
 @Composable
 fun CodeEditText(
@@ -47,8 +47,20 @@ fun CodeEditText(
 ) {
     val currentText = remember {
         mutableStateOf(
-            TextFieldValue()
+            TextFieldValue(
+                annotatedString = AnnotatedString(highlights.getCode())
+            )
         )
+    }
+
+    LaunchedEffect(highlights) {
+//        highlights.getHighlightsAsync(object : DefaultHighlightsResultListener() {
+//            override fun onSuccess(result: List<CodeHighlight>) {
+//                currentText.value = currentText.value.copy(
+//                    annotatedString = result.generateAnnotatedString(currentText.value.text),
+//                )
+//            }
+//        })
     }
 
     TextField(
@@ -58,13 +70,7 @@ fun CodeEditText(
             currentText.value = fieldUpdate
             onValueChange(fieldUpdate.text)
         },
-        value = TextFieldValue(
-            selection = currentText.value.selection,
-            composition = currentText.value.composition,
-            annotatedString = buildAnnotatedString {
-                generateAnnotatedString(highlights)
-            },
-        ),
+        value = currentText.value,
         enabled = enabled,
         readOnly = readOnly,
         textStyle = textStyle,

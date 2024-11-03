@@ -5,16 +5,22 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import calculateFieldPhraseUpdate
+import dev.snipme.highlights.DefaultHighlightsResultListener
 import dev.snipme.highlights.Highlights
+import dev.snipme.highlights.model.CodeHighlight
 import generateAnnotatedString
 import androidx.compose.material3.LocalTextStyle as LocalTextStyle3
 import androidx.compose.material3.TextField as TextField3
@@ -47,8 +53,20 @@ fun CodeEditText(
 ) {
     val currentText = remember {
         mutableStateOf(
-            TextFieldValue()
+            TextFieldValue(
+                AnnotatedString(highlights.getCode())
+            )
         )
+    }
+
+    LaunchedEffect(highlights) {
+        highlights.getHighlightsAsync(object : DefaultHighlightsResultListener() {
+            override fun onSuccess(result: List<CodeHighlight>) {
+                currentText.value = currentText.value.copy(
+                    annotatedString = result.generateAnnotatedString(currentText.value.text),
+                )
+            }
+        })
     }
 
     TextField3(
@@ -58,13 +76,7 @@ fun CodeEditText(
             currentText.value = fieldUpdate
             onValueChange(fieldUpdate.text)
         },
-        value = TextFieldValue(
-            selection = currentText.value.selection,
-            composition = currentText.value.composition,
-            annotatedString = buildAnnotatedString {
-                generateAnnotatedString(highlights)
-            },
-        ),
+        value = currentText.value,
         enabled = enabled,
         readOnly = readOnly,
         textStyle = textStyle,
@@ -116,12 +128,14 @@ fun CodeEditTextSwiftUi(
     val currentText = remember {
         mutableStateOf(
             TextFieldValue().copy(
-                annotatedString = buildAnnotatedString {
-                    generateAnnotatedString(highlightsState.value)
-                }
+//                annotatedString = buildAnnotatedString {
+//                    generateAnnotatedString(highlightsState.value)
+//                }
             )
         )
     }
+
+
 
     TextField3(
         modifier = modifier.fillMaxWidth(),
@@ -133,9 +147,9 @@ fun CodeEditTextSwiftUi(
             onValueChange(fieldUpdate)
             currentText.value =
                 fieldUpdate.copy(
-                    annotatedString = buildAnnotatedString {
-                        generateAnnotatedString(highlightsState.value)
-                    }
+//                    annotatedString = buildAnnotatedString {
+//                        generateAnnotatedString(highlightsState.value)
+//                    }
                 )
         },
         enabled = enabled,

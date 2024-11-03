@@ -1,13 +1,17 @@
 package dev.snipme.desktopexample
 
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -78,44 +82,49 @@ fun main() = application {
             )
         ) {
             Surface {
-                Column(
+                Row(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(16.dp),
-                    horizontalAlignment = Alignment.Start,
-                    verticalArrangement = Arrangement.SpaceBetween
+                    horizontalArrangement = Arrangement.Center,
                 ) {
-                    Spacer(Modifier.height(8.dp))
+//                    Spacer(Modifier.height(8.dp))
+//
+//                    ThemeSwitcher(
+//                        isDarkMode,
+//                        modifier = Modifier.fillMaxWidth().weight(1f),
+//                    ) { setToDarkMode ->
+//                        isDarkModeState.value = setToDarkMode
+//                        updateSyntaxTheme(highlights.getTheme().useDark(setToDarkMode)!!)
+//                    }
+//
+//                    Spacer(Modifier.height(16.dp))
 
-                    ThemeSwitcher(
-                        isDarkMode,
-                        modifier = Modifier.fillMaxWidth(),
-                    ) { setToDarkMode ->
-                        isDarkModeState.value = setToDarkMode
-                        updateSyntaxTheme(highlights.getTheme().useDark(setToDarkMode)!!)
-                    }
+//                    Text(
+//                        modifier = Modifier.fillMaxWidth(),
+//                        text = "KodeView",
+//                        fontSize = 18.sp,
+//                        textAlign = TextAlign.Center,
+//                    )
+//
+//                    Spacer(modifier = Modifier.size(16.dp))
 
-                    Spacer(Modifier.height(16.dp))
-
-                    Text(
-                        modifier = Modifier.fillMaxWidth(),
-                        text = "KodeView",
-                        fontSize = 18.sp,
-                        textAlign = TextAlign.Center,
+                    CodeTextView(
+                        highlights = highlights,
+                        modifier = Modifier.weight(1f)
+                            .verticalScroll(rememberScrollState())
+                            .horizontalScroll(rememberScrollState()),
                     )
-
-                    Spacer(modifier = Modifier.size(16.dp))
-
-                    CodeTextView(highlights = highlights)
-
-                    Spacer(modifier = Modifier.size(16.dp))
-
-                    Divider()
-
-                    Spacer(modifier = Modifier.size(16.dp))
-
-                    Text("Edit this...")
+//
+//                    Spacer(modifier = Modifier.size(16.dp))
+//
+//                    Divider()
+//
+//                    Spacer(modifier = Modifier.size(16.dp))
+//
+//                    Text("Edit this...")
                     CodeEditText(
+                        modifier = Modifier.fillMaxWidth().weight(1f),
                         highlights = highlights,
                         onValueChange = { textValue ->
                             highlightsState.value = highlights.getBuilder()
@@ -132,28 +141,28 @@ fun main() = application {
                         ),
                     )
 
-                    Spacer(modifier = Modifier.size(16.dp))
-
-                    Spacer(modifier = Modifier.weight(1f))
-
-                    Dropdown(
-                        options = SyntaxThemes.getNames(),
-                        selected = SyntaxThemes.themes().keys.indexOf(highlights.getTheme().key),
-                    ) { selectedThemeName ->
-                        updateSyntaxTheme(
-                            SyntaxThemes.themes(isDarkMode)[selectedThemeName.lowercase()]!!
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.size(16.dp))
-
-                    Dropdown(
-                        options = SyntaxLanguage.getNames(),
-                        selected = SyntaxLanguage.getNames().indexOfFirst {
-                            it.equals(highlights.getLanguage().name, ignoreCase = true)
-                        }) { selectedLanguage ->
-                        updateSyntaxLanguage(SyntaxLanguage.getByName(selectedLanguage)!!)
-                    }
+//                    Spacer(modifier = Modifier.size(16.dp))
+//
+//                    Spacer(modifier = Modifier.weight(1f))
+//
+//                    Dropdown(
+//                        options = SyntaxThemes.getNames(),
+//                        selected = SyntaxThemes.themes().keys.indexOf(highlights.getTheme().key),
+//                    ) { selectedThemeName ->
+//                        updateSyntaxTheme(
+//                            SyntaxThemes.themes(isDarkMode)[selectedThemeName.lowercase()]!!
+//                        )
+//                    }
+//
+//                    Spacer(modifier = Modifier.size(16.dp))
+//
+//                    Dropdown(
+//                        options = SyntaxLanguage.getNames(),
+//                        selected = SyntaxLanguage.getNames().indexOfFirst {
+//                            it.equals(highlights.getLanguage().name, ignoreCase = true)
+//                        }) { selectedLanguage ->
+//                        updateSyntaxLanguage(SyntaxLanguage.getByName(selectedLanguage)!!)
+//                    }
                 }
             }
         }
