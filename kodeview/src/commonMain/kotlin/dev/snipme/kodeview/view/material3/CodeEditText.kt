@@ -67,7 +67,7 @@ fun CodeEditText(
         })
     }
 
-    fun onValueChange(change: TextFieldValue) {
+    fun updateNewValue(change: TextFieldValue) {
         val updated = change.updateIndentations(handleIndentations)
         if (updated.text != currentText.value.text) {
             onValueChange(updated.text)
@@ -80,7 +80,7 @@ fun CodeEditText(
 
     TextField3(
         modifier = modifier.fillMaxWidth(),
-        onValueChange = ::onValueChange,
+        onValueChange = ::updateNewValue,
         value = currentText.value,
         enabled = enabled,
         readOnly = readOnly,
@@ -109,7 +109,7 @@ fun CodeEditTextSwiftUi(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     readOnly: Boolean = false,
-    translateTabToSpaces: Boolean = true,
+    handleIndentations: Boolean = true,
     textStyle: TextStyle = LocalTextStyle3.current,
     label: @Composable (() -> Unit)? = null,
     placeholder: @Composable (() -> Unit)? = null,
@@ -126,35 +126,40 @@ fun CodeEditTextSwiftUi(
     shape: Shape = TextFieldDefaults3.shape,
     colors: TextFieldColors3 = TextFieldDefaults3.colors()
 ) {
-    val highlightsState = remember {
-        mutableStateOf(highlights)
-    }
-
     val currentText = remember {
         mutableStateOf(
-            TextFieldValue().copy(
-//                annotatedString = buildAnnotatedString {
-//                    generateAnnotatedString(highlightsState.value)
-//                }
+            TextFieldValue(
+                AnnotatedString(highlights.getCode())
             )
+        )
+    }
+
+    LaunchedEffect(highlights) {
+        highlights.getHighlightsAsync(object : DefaultHighlightsResultListener() {
+            override fun onSuccess(result: List<CodeHighlight>) {
+                currentText.value = currentText.value.copy(
+                    annotatedString = result.generateAnnotatedString(currentText.value.text),
+                )
+            }
+        })
+    }
+
+    fun updateNewValue(change: TextFieldValue) {
+        val updated = change.updateIndentations(handleIndentations)
+
+        if (updated.text != currentText.value.text) {
+            onValueChange(updated)
+        }
+
+        currentText.value = updated.copySpanStyles(
+            currentText.value
         )
     }
 
     TextField3(
         modifier = modifier.fillMaxWidth(),
         value = currentText.value,
-        onValueChange = {
-            val fieldUpdate = it.updateIndentations(translateTabToSpaces)
-            highlightsState.value =
-                highlightsState.value.getBuilder().code(fieldUpdate.text).build()
-            onValueChange(fieldUpdate)
-            currentText.value =
-                fieldUpdate.copy(
-//                    annotatedString = buildAnnotatedString {
-//                        generateAnnotatedString(highlightsState.value)
-//                    }
-                )
-        },
+        onValueChange = ::updateNewValue,
         enabled = enabled,
         readOnly = readOnly,
         textStyle = textStyle,

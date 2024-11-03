@@ -28,7 +28,7 @@ fun CodeEditText(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     readOnly: Boolean = false,
-    translateTabToSpaces: Boolean = true,
+    handleIndentations: Boolean = true,
     textStyle: TextStyle = LocalTextStyle.current,
     label: @Composable (() -> Unit)? = null,
     placeholder: @Composable (() -> Unit)? = null,
@@ -66,7 +66,7 @@ fun CodeEditText(
     TextField(
         modifier = modifier.fillMaxWidth(),
         onValueChange = {
-            val fieldUpdate = it.updateIndentations(translateTabToSpaces)
+            val fieldUpdate = it.updateIndentations(handleIndentations)
             currentText.value = fieldUpdate
             onValueChange(fieldUpdate.text)
         },

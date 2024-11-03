@@ -33,8 +33,8 @@ fun List<CodeHighlight>.generateAnnotatedString(code: String) =
     }
 
 
-internal fun TextFieldValue.updateIndentations(translateTabToSpaces: Boolean) =
-    if (translateTabToSpaces && text.contains(TAB_CHAR)) {
+internal fun TextFieldValue.updateIndentations(handleIndentations: Boolean) =
+    if (handleIndentations && text.contains(TAB_CHAR)) {
         val result = text.replace(TAB_CHAR, " ".repeat(TAB_LENGTH))
         this.copy(text = result, TextRange(selection.start + TAB_LENGTH - 1))
     } else {
