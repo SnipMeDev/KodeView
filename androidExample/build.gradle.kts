@@ -59,5 +59,5 @@ dependencies {
     implementation(compose.material3)
     implementation(compose.ui)
     implementation(compose.materialIconsExtended)
-    implementation(libs.kodeview)
+    implementation(project(":kodeview"))
 }

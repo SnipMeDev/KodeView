@@ -9,16 +9,20 @@ import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldColors
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
-import calculateFieldPhraseUpdate
+import copySpanStyles
+import dev.snipme.highlights.DefaultHighlightsResultListener
+import updateIndentations
 import dev.snipme.highlights.Highlights
+import dev.snipme.highlights.model.CodeHighlight
 import generateAnnotatedString
 
 @Composable
@@ -28,7 +32,7 @@ fun CodeEditText(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     readOnly: Boolean = false,
-    translateTabToSpaces: Boolean = true,
+    handleIndentations: Boolean = true,
     textStyle: TextStyle = LocalTextStyle.current,
     label: @Composable (() -> Unit)? = null,
     placeholder: @Composable (() -> Unit)? = null,
@@ -47,24 +51,37 @@ fun CodeEditText(
 ) {
     val currentText = remember {
         mutableStateOf(
-            TextFieldValue()
+            TextFieldValue(
+                AnnotatedString(highlights.getCode())
+            )
+        )
+    }
+
+    LaunchedEffect(highlights) {
+        highlights.getHighlightsAsync(object : DefaultHighlightsResultListener() {
+            override fun onSuccess(result: List<CodeHighlight>) {
+                currentText.value = currentText.value.copy(
+                    annotatedString = result.generateAnnotatedString(currentText.value.text),
+                )
+            }
+        })
+    }
+
+    fun updateNewValue(change: TextFieldValue) {
+        val updated = change.updateIndentations(handleIndentations)
+        if (updated.text != currentText.value.text) {
+            onValueChange(updated.text)
+        }
+
+        currentText.value = updated.copySpanStyles(
+            currentText.value
         )
     }
 
     TextField(
         modifier = modifier.fillMaxWidth(),
-        onValueChange = {
-            val fieldUpdate = it.calculateFieldPhraseUpdate(translateTabToSpaces)
-            currentText.value = fieldUpdate
-            onValueChange(fieldUpdate.text)
-        },
-        value = TextFieldValue(
-            selection = currentText.value.selection,
-            composition = currentText.value.composition,
-            annotatedString = buildAnnotatedString {
-                generateAnnotatedString(highlights)
-            },
-        ),
+        onValueChange = ::updateNewValue,
+        value = currentText.value,
         enabled = enabled,
         readOnly = readOnly,
         textStyle = textStyle,

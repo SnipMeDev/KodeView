@@ -14,7 +14,7 @@ kotlinMultiplatform = "2.0.20"
 compose = "1.6.11"
 androidLibrary = "8.6.1"
 kodeview = "0.8.0"
-highlights = "0.7.1"
+highlights = "1.0.0"
 composeMaterial = "1.4.0"
 
 [libraries]
