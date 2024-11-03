@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.multiplatform)
     alias(libs.plugins.compose)
+    alias(libs.plugins.compose.compiler)
 }
 
 kotlin {
@@ -18,12 +19,8 @@ kotlin {
                 implementation(compose.material)
                 implementation(compose.material3)
                 implementation(compose.materialIconsExtended)
-                implementation(libs.kodeview)
+                implementation(project(":kodeview"))
             }
         }
     }
-}
-
-compose.experimental {
-    web.application {}
 }

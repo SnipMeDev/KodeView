@@ -10,9 +10,9 @@ pluginManagement {
     }
 
     plugins {
-        val kotlinVersion = "1.9.21"
-        val agpVersion = "8.1.1"
-        val composeVersion = "1.5.11"
+        val kotlinVersion = "2.0.20"
+        val agpVersion = "8.6.1"
+        val composeVersion = "1.6.11"
 
         kotlin("jvm").version(kotlinVersion)
         kotlin("multiplatform").version(kotlinVersion)
@@ -21,6 +21,8 @@ pluginManagement {
         id("com.android.application").version(agpVersion)
         id("com.android.library").version(agpVersion)
         id("org.jetbrains.compose").version(composeVersion)
+        id("org.jetbrains.kotlin.plugin.compose").version(kotlinVersion)
+
     }
 }
 
