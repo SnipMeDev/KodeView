@@ -16,6 +16,7 @@ dependencies {
     implementation(compose.components.resources)
     implementation(compose.desktop.currentOs)
     implementation(project(":kodeview"))
+    implementation(project(":exampleCommon"))
 }
 
 compose.desktop {

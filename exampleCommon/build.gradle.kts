@@ -6,21 +6,21 @@ plugins {
 }
 
 kotlin {
+    jvm()
     js(IR) {
         browser()
         binaries.executable()
     }
 
     sourceSets {
-        val jsMain by getting {
+        val commonMain by getting {
             dependencies {
-                implementation(compose.ui)
+                implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material)
                 implementation(compose.material3)
+                implementation(compose.ui)
                 implementation(compose.materialIconsExtended)
-                implementation(project(":kodeview"))
-                implementation(project(":exampleCommon"))
             }
         }
     }

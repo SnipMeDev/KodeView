@@ -1,3 +1,4 @@
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -23,13 +24,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.CanvasBasedWindow
+import dev.snipme.androidexample.LineNumberSwitcher
+import dev.snipme.desktopexample.Dropdown
+import dev.snipme.desktopexample.ThemeSwitcher
 import dev.snipme.highlights.Highlights
 import dev.snipme.highlights.model.SyntaxLanguage
 import dev.snipme.highlights.model.SyntaxTheme
 import dev.snipme.highlights.model.SyntaxThemes
 import dev.snipme.highlights.model.SyntaxThemes.useDark
-import dev.snipme.kodeview.view.material3.CodeEditText
 import dev.snipme.kodeview.view.CodeTextView
+import dev.snipme.kodeview.view.material3.CodeEditText
 import org.jetbrains.skiko.wasm.onWasmReady
 
 private val sampleCode =
@@ -50,7 +54,9 @@ fun main() {
             applyDefaultStyles = true,
         ) {
             val isDarkModeState = remember { mutableStateOf(false) }
+            val areLineNumbersEnabled = remember { mutableStateOf(true) }
             val isDarkMode = isDarkModeState.value
+            val lineNumbersEnabled = areLineNumbersEnabled.value
 
             val highlightsState = remember {
                 mutableStateOf(
@@ -91,6 +97,13 @@ fun main() {
                         }
 
                         Spacer(Modifier.height(16.dp))
+
+                        LineNumberSwitcher(
+                            lineNumbersEnabled,
+                            modifier = Modifier.fillMaxWidth()
+                        ) { lineNumberEnabled ->
+                            areLineNumbersEnabled.value = lineNumberEnabled
+                        }
 
                         Text(
                             modifier = Modifier.fillMaxWidth(),

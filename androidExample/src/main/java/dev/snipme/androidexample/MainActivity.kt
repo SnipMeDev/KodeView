@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -28,6 +27,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.snipme.desktopexample.Dropdown
+import dev.snipme.desktopexample.ThemeSwitcher
 import dev.snipme.highlights.Highlights
 import dev.snipme.highlights.model.SyntaxLanguage
 import dev.snipme.highlights.model.SyntaxTheme
@@ -104,7 +105,10 @@ fun App() {
 
                 Spacer(Modifier.height(16.dp))
 
-                LineNumberSwitcher(lineNumbersEnabled, modifier = Modifier.fillMaxWidth()) { lineNumberEnabled ->
+                LineNumberSwitcher(
+                    lineNumbersEnabled,
+                    modifier = Modifier.fillMaxWidth()
+                ) { lineNumberEnabled ->
                     areLineNumbersEnabled.value = lineNumberEnabled
                 }
 
@@ -128,6 +132,7 @@ fun App() {
                 Text("Edit this...")
                 CodeEditText(
                     highlights = highlights,
+                    showLineNumbers = lineNumbersEnabled,
                     onValueChange = { textValue ->
                         highlightsState.value = highlights.getBuilder()
                             .code(textValue)
@@ -141,7 +146,6 @@ fun App() {
                         disabledIndicatorColor = Color.Transparent,
                         errorIndicatorColor = Color.Transparent,
                     ),
-                    showLineNumbers = lineNumbersEnabled,
                 )
 
                 Spacer(modifier = Modifier.size(16.dp))

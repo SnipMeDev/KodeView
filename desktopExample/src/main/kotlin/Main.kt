@@ -1,5 +1,6 @@
 package dev.snipme.desktopexample
 
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -26,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import dev.snipme.androidexample.LineNumberSwitcher
 import dev.snipme.highlights.Highlights
 import dev.snipme.highlights.model.SyntaxLanguage
 import dev.snipme.highlights.model.SyntaxTheme
@@ -45,7 +48,9 @@ private val sampleCode =
 
 fun main() = application {
     val isDarkModeState = remember { mutableStateOf(false) }
+    val areLineNumbersEnabled = remember { mutableStateOf(true) }
     val isDarkMode = isDarkModeState.value
+    val lineNumbersEnabled = areLineNumbersEnabled.value
 
     val highlightsState = remember {
         mutableStateOf(
@@ -89,8 +94,14 @@ fun main() = application {
                         updateSyntaxTheme(highlights.getTheme().useDark(setToDarkMode)!!)
                     }
 
-
                     Spacer(Modifier.height(16.dp))
+
+                    LineNumberSwitcher(
+                        lineNumbersEnabled,
+                        modifier = Modifier.fillMaxWidth()
+                    ) { lineNumberEnabled ->
+                        areLineNumbersEnabled.value = lineNumberEnabled
+                    }
 
                     Text(
                         modifier = Modifier.fillMaxWidth(),
@@ -109,19 +120,24 @@ fun main() = application {
                         CodeTextView(
                             modifier = Modifier.weight(1f),
                             highlights = highlights,
+                            showLineNumbers = lineNumbersEnabled,
+                            textStyle = MaterialTheme.typography.bodyMedium,
                         )
                         VerticalDivider(Modifier.padding(8.dp))
                         CodeEditText(
-                            modifier = Modifier.weight(1f),
-                            label = { Text("Edit code") },
+                            modifier = Modifier
+                                .horizontalScroll(rememberScrollState())
+                                .weight(1f),
                             highlights = highlights,
+                            showLineNumbers = lineNumbersEnabled,
+                            label = { Text("Edit code") },
                             onValueChange = { textValue ->
                                 highlightsState.value = highlights.getBuilder()
                                     .code(textValue)
                                     .build()
                             },
                             colors = TextFieldDefaults.colors(
-                                unfocusedContainerColor = Color.Transparent,
+                                unfocusedContainerColor = Color.Gray,
                                 focusedContainerColor = Color.Transparent,
                                 focusedIndicatorColor = Color.Transparent,
                                 unfocusedIndicatorColor = Color.Transparent,

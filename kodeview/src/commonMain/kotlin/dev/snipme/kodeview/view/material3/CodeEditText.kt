@@ -3,19 +3,15 @@ package dev.snipme.kodeview.view.material3
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
@@ -70,7 +66,6 @@ fun CodeEditText(
         )
     }
 
-
     LaunchedEffect(highlights) {
         highlights.getHighlightsAsync(object : DefaultHighlightsResultListener() {
             override fun onSuccess(result: List<CodeHighlight>) {
@@ -95,10 +90,9 @@ fun CodeEditText(
     Row(modifier = modifier.fillMaxWidth()) {
         if (showLineNumbers) {
             val lines = currentText.value.text.lines().size.coerceAtLeast(minLines)
+            val labelPadding = label?.run { 8.dp } ?: 0.dp
             Column(
-                horizontalAlignment = Alignment.End,
-                modifier = Modifier
-                    .padding(top = 16.dp, end = 8.dp)
+                modifier = Modifier.padding(top = 16.dp + labelPadding)
             ) {
                 (1..lines).forEach { i ->
                     Text(
@@ -199,9 +193,9 @@ fun CodeEditTextSwiftUi(
     Row(modifier = modifier.fillMaxWidth()) {
         if (showLineNumbers) {
             val lines = currentText.value.text.lines().size.coerceAtLeast(minLines)
+            // Align with TextField's internal padding
             Column(
-                modifier = Modifier
-                    .padding(top = 16.dp, end = 8.dp) // Align with TextField's internal padding
+                modifier
             ) {
                 (1..lines).forEach { i ->
                     Text(

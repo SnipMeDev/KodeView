@@ -21,7 +21,7 @@ repositories {
 ```
 
 ```shell
-implementation("dev.snipme:kodeview:0.9.0")
+implementation("dev.snipme:kodeview:0.10.0")
 ```
 
 ## Features ✨
@@ -57,7 +57,10 @@ fun MyApp() {
 
    MaterialTheme {
       Column {
-        CodeTextView(highlights = highlights.value)
+        CodeTextView(
+            highlights = highlights.value,
+            showLineNumbers = true,
+            )
       }
    }
 }
@@ -83,6 +86,7 @@ fun MyApp() {
       Column {
           CodeEditText(
               highlights = highlights.value,
+              showLineNumbers = true,
               onValueChange = { textValue ->
                   highlights.value = highlights.value.getBuilder()
                       .code(textValue)
