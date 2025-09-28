@@ -1,6 +1,6 @@
 package dev.snipme.desktopexample
 
-import androidx.compose.foundation.horizontalScroll
+import Samples
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -37,15 +36,6 @@ import dev.snipme.highlights.model.SyntaxThemes.useDark
 import dev.snipme.kodeview.view.CodeTextView
 import dev.snipme.kodeview.view.material3.CodeEditText
 
-private val sampleCode =
-    """
-    class Main {
-        public static void main(String[] args) {
-            int abcd = 100;
-        }
-    }
-    """.trimIndent()
-
 fun main() = application {
     val isDarkModeState = remember { mutableStateOf(false) }
     val areLineNumbersEnabled = remember { mutableStateOf(true) }
@@ -54,7 +44,7 @@ fun main() = application {
 
     val highlightsState = remember {
         mutableStateOf(
-            Highlights.Builder(code = sampleCode).build()
+            Highlights.Builder(code = Samples.kotlin).build()
         )
     }
     val highlights = highlightsState.value
@@ -125,9 +115,7 @@ fun main() = application {
                         )
                         VerticalDivider(Modifier.padding(8.dp))
                         CodeEditText(
-                            modifier = Modifier
-                                .horizontalScroll(rememberScrollState())
-                                .weight(1f),
+                            modifier = Modifier.weight(1f),
                             highlights = highlights,
                             showLineNumbers = lineNumbersEnabled,
                             label = { Text("Edit code") },
@@ -137,7 +125,7 @@ fun main() = application {
                                     .build()
                             },
                             colors = TextFieldDefaults.colors(
-                                unfocusedContainerColor = Color.Gray,
+                                unfocusedContainerColor = Color.Transparent,
                                 focusedContainerColor = Color.Transparent,
                                 focusedIndicatorColor = Color.Transparent,
                                 unfocusedIndicatorColor = Color.Transparent,

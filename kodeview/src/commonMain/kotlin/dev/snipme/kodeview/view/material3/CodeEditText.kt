@@ -1,10 +1,12 @@
 package dev.snipme.kodeview.view.material3
 
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
@@ -103,8 +105,13 @@ fun CodeEditText(
             }
         }
 
+        val lineNumberAwareModifier = if (showLineNumbers)
+            modifier.horizontalScroll(rememberScrollState())
+        else
+            modifier.padding(start = 8.dp)
+
         TextField3(
-            modifier = Modifier.weight(1f),
+            modifier = lineNumberAwareModifier,
             onValueChange = ::updateNewValue,
             value = currentText.value,
             enabled = enabled,
@@ -193,7 +200,6 @@ fun CodeEditTextSwiftUi(
     Row(modifier = modifier.fillMaxWidth()) {
         if (showLineNumbers) {
             val lines = currentText.value.text.lines().size.coerceAtLeast(minLines)
-            // Align with TextField's internal padding
             Column(
                 modifier
             ) {
@@ -206,8 +212,15 @@ fun CodeEditTextSwiftUi(
             }
         }
 
+        // TODO Extract common logic to a wrapper
+
+        val lineNumberAwareModifier = if (showLineNumbers)
+            modifier.horizontalScroll(rememberScrollState())
+        else
+            modifier
+
         TextField3(
-            modifier = Modifier.weight(1f),
+            modifier = lineNumberAwareModifier.weight(1f),
             value = currentText.value,
             onValueChange = ::updateNewValue,
             enabled = enabled,
