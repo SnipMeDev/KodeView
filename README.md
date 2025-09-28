@@ -60,6 +60,8 @@ fun MyApp() {
         CodeTextView(
             highlights = highlights.value,
             showLineNumbers = true,
+            hasVerticalScroll = true,
+            hasHorizontalScroll = true,
             )
       }
    }
@@ -87,6 +89,8 @@ fun MyApp() {
           CodeEditText(
               highlights = highlights.value,
               showLineNumbers = true,
+              hasVerticalScroll = true,
+              hasHorizontalScroll = true,
               onValueChange = { textValue ->
                   highlights.value = highlights.value.getBuilder()
                       .code(textValue)

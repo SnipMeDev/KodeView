@@ -1,8 +1,6 @@
 package dev.snipme.kodeview.view
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -17,11 +15,12 @@ fun CodeTextView(
     modifier: Modifier = Modifier.background(Color.Transparent),
     highlights: Highlights,
     textStyle: TextStyle = LocalTextStyle.current,
+    hasHorizontalScroll: Boolean = false,
     showLineNumbers: Boolean = false,
     lineNumberTextStyle: TextStyle = textStyle.copy(),
     async: Boolean = false,
 ) {
-    val textState = rememberTextStateWithHighlights(highlights, async = async)
+    val (textState, _) = rememberTextStateWithHighlights(highlights, async = async)
 
     Surface(
         modifier = modifier,
@@ -29,11 +28,11 @@ fun CodeTextView(
     ) {
         LineNumberWrapper(
             text = textState.text,
+            hasHorizontalScroll = hasHorizontalScroll,
             showLineNumbers = showLineNumbers,
             lineNumberTextStyle = lineNumberTextStyle
         ) {
             Text(
-                modifier = Modifier.verticalScroll(rememberScrollState()),
                 text = textState.annotatedString,
                 style = textStyle
             )

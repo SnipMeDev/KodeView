@@ -3,12 +3,13 @@ package dev.snipme.kodeview.view.material3
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -26,6 +27,8 @@ import copySpanStyles
 import dev.snipme.highlights.DefaultHighlightsResultListener
 import dev.snipme.highlights.Highlights
 import dev.snipme.highlights.model.CodeHighlight
+import dev.snipme.kodeview.view.LineNumberWrapper
+import dev.snipme.kodeview.view.rememberTextStateWithHighlights
 import generateAnnotatedString
 import updateIndentations
 import androidx.compose.material3.LocalTextStyle as LocalTextStyle3
@@ -58,80 +61,50 @@ fun CodeEditText(
     shape: Shape = TextFieldDefaults3.shape,
     colors: TextFieldColors3 = TextFieldDefaults3.colors(),
     showLineNumbers: Boolean = false,
+    hasHorizontalScroll: Boolean = false,
     lineNumberTextStyle: TextStyle = textStyle.copy()
 ) {
-    val currentText = remember {
-        mutableStateOf(
-            TextFieldValue(
-                AnnotatedString(highlights.getCode())
+    val (currentText, updateCallback) = rememberTextStateWithHighlights(
+        highlights,
+        onValueChange = onValueChange,
+        handleIndentations = handleIndentations,
+    )
+
+    val labelPadding = label?.run { 8.dp } ?: 0.dp
+    val numbersPadding = PaddingValues(top = 16.dp + labelPadding)
+
+    Surface(
+        modifier = modifier.fillMaxWidth(),
+    ) {
+        LineNumberWrapper(
+            text = currentText.text,
+            showLineNumbers = showLineNumbers,
+            hasHorizontalScroll = hasHorizontalScroll,
+            lineNumberTextStyle = lineNumberTextStyle,
+            numbersPadding = numbersPadding,
+        ) {
+            TextField3(
+                onValueChange = updateCallback,
+                value = currentText,
+                enabled = enabled,
+                readOnly = readOnly,
+                textStyle = textStyle,
+                label = label,
+                placeholder = placeholder,
+                leadingIcon = leadingIcon,
+                trailingIcon = trailingIcon,
+                isError = isError,
+                visualTransformation = visualTransformation,
+                keyboardOptions = keyboardOptions,
+                keyboardActions = keyboardActions,
+                singleLine = singleLine,
+                maxLines = maxLines,
+                minLines = minLines,
+                interactionSource = interactionSource,
+                shape = shape,
+                colors = colors,
             )
-        )
-    }
-
-    LaunchedEffect(highlights) {
-        highlights.getHighlightsAsync(object : DefaultHighlightsResultListener() {
-            override fun onSuccess(result: List<CodeHighlight>) {
-                currentText.value = currentText.value.copy(
-                    annotatedString = result.generateAnnotatedString(currentText.value.text),
-                )
-            }
-        })
-    }
-
-    fun updateNewValue(change: TextFieldValue) {
-        val updated = change.updateIndentations(handleIndentations)
-        if (updated.text != currentText.value.text) {
-            onValueChange(updated.text)
         }
-
-        currentText.value = updated.copySpanStyles(
-            currentText.value
-        )
-    }
-
-    Row(modifier = modifier.fillMaxWidth()) {
-        if (showLineNumbers) {
-            val lines = currentText.value.text.lines().size.coerceAtLeast(minLines)
-            val labelPadding = label?.run { 8.dp } ?: 0.dp
-            Column(
-                modifier = Modifier.padding(top = 16.dp + labelPadding)
-            ) {
-                (1..lines).forEach { i ->
-                    Text(
-                        text = i.toString(),
-                        style = lineNumberTextStyle,
-                    )
-                }
-            }
-        }
-
-        val lineNumberAwareModifier = if (showLineNumbers)
-            modifier.horizontalScroll(rememberScrollState())
-        else
-            modifier.padding(start = 8.dp)
-
-        TextField3(
-            modifier = lineNumberAwareModifier,
-            onValueChange = ::updateNewValue,
-            value = currentText.value,
-            enabled = enabled,
-            readOnly = readOnly,
-            textStyle = textStyle,
-            label = label,
-            placeholder = placeholder,
-            leadingIcon = leadingIcon,
-            trailingIcon = trailingIcon,
-            isError = isError,
-            visualTransformation = visualTransformation,
-            keyboardOptions = keyboardOptions,
-            keyboardActions = keyboardActions,
-            singleLine = singleLine,
-            maxLines = maxLines,
-            minLines = minLines,
-            interactionSource = interactionSource,
-            shape = shape,
-            colors = colors,
-        )
     }
 }
 

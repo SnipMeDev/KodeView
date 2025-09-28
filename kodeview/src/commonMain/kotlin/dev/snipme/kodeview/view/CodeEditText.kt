@@ -1,34 +1,36 @@
 package dev.snipme.kodeview.view
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldColors
 import androidx.compose.material.TextFieldDefaults
-import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.dp
 import copySpanStyles
 import dev.snipme.highlights.DefaultHighlightsResultListener
-import updateIndentations
 import dev.snipme.highlights.Highlights
 import dev.snipme.highlights.model.CodeHighlight
 import generateAnnotatedString
-import androidx.compose.ui.unit.dp
+import updateIndentations
 
 @Composable
 fun CodeEditText(
@@ -54,6 +56,7 @@ fun CodeEditText(
     shape: Shape = TextFieldDefaults.TextFieldShape,
     colors: TextFieldColors = TextFieldDefaults.textFieldColors(),
     showLineNumbers: Boolean = false,
+    hasHorizontalScroll: Boolean = false,
     lineNumberTextStyle: TextStyle = textStyle.copy()
 ) {
     val currentText = remember {
@@ -90,7 +93,7 @@ fun CodeEditText(
             val lines = currentText.value.text.lines().size
             Column(horizontalAlignment = Alignment.End,) {
                 for (i in 1..lines) {
-                    androidx.compose.material.Text(
+                    Text(
                         text = i.toString(),
                         style = lineNumberTextStyle
                     )

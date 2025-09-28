@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -33,12 +35,11 @@ import dev.snipme.highlights.model.SyntaxLanguage
 import dev.snipme.highlights.model.SyntaxTheme
 import dev.snipme.highlights.model.SyntaxThemes
 import dev.snipme.highlights.model.SyntaxThemes.useDark
-import dev.snipme.kodeview.view.CodeTextView
 import dev.snipme.kodeview.view.material3.CodeEditText
 
 fun main() = application {
     val isDarkModeState = remember { mutableStateOf(false) }
-    val areLineNumbersEnabled = remember { mutableStateOf(true) }
+    val areLineNumbersEnabled = remember { mutableStateOf(false) }
     val isDarkMode = isDarkModeState.value
     val lineNumbersEnabled = areLineNumbersEnabled.value
 
@@ -107,17 +108,21 @@ fun main() = application {
                             .weight(1f)
                             .fillMaxWidth(),
                     ) {
-                        CodeTextView(
-                            modifier = Modifier.weight(1f),
-                            highlights = highlights,
-                            showLineNumbers = lineNumbersEnabled,
-                            textStyle = MaterialTheme.typography.bodyMedium,
-                        )
+//                        CodeTextView(
+//                            modifier = Modifier.weight(1f)
+//                                .verticalScroll(rememberScrollState()),
+//                            highlights = highlights,
+//                            showLineNumbers = lineNumbersEnabled,
+//                            hasHorizontalScroll = true,
+//                            textStyle = MaterialTheme.typography.bodyMedium,
+//                        )
                         VerticalDivider(Modifier.padding(8.dp))
                         CodeEditText(
-                            modifier = Modifier.weight(1f),
+                            modifier = Modifier.weight(1f)
+                                .verticalScroll(rememberScrollState()),
                             highlights = highlights,
                             showLineNumbers = lineNumbersEnabled,
+                            hasHorizontalScroll = true,
                             label = { Text("Edit code") },
                             onValueChange = { textValue ->
                                 highlightsState.value = highlights.getBuilder()
