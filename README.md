@@ -31,6 +31,7 @@ implementation("dev.snipme:kodeview:0.10.0")
 - Multiple syntax languages (Java, Swift, Kotlin, C, ...)
 - Themes
 - Text bolding (emphasis)
+- Line numbers
 - Written in pure Kotlin, so available for many platforms 📱 💻 🖥️
 
 ## Support ☕

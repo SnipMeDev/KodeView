@@ -32,6 +32,7 @@ import dev.snipme.highlights.model.CodeHighlight
 import generateAnnotatedString
 import updateIndentations
 
+// TODO Refactor and test
 @Composable
 fun CodeEditText(
     highlights: Highlights,
@@ -91,7 +92,7 @@ fun CodeEditText(
     Row(modifier = modifier) {
         if (showLineNumbers) {
             val lines = currentText.value.text.lines().size
-            Column(horizontalAlignment = Alignment.End,) {
+            Column(horizontalAlignment = Alignment.End) {
                 for (i in 1..lines) {
                     Text(
                         text = i.toString(),

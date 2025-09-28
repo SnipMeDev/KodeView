@@ -108,6 +108,7 @@ fun CodeEditText(
     }
 }
 
+// TODO Refactor and test
 @Composable
 fun CodeEditTextSwiftUi(
     highlights: Highlights,
