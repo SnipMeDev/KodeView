@@ -18,9 +18,8 @@ fun CodeTextView(
     hasHorizontalScroll: Boolean = false,
     showLineNumbers: Boolean = false,
     lineNumberTextStyle: TextStyle = textStyle.copy(),
-    async: Boolean = false,
 ) {
-    val (textState, _) = rememberTextStateWithHighlights(highlights, async = async)
+    val (textState, _) = rememberTextStateWithHighlights(highlights)
 
     Surface(
         modifier = modifier,

@@ -35,6 +35,7 @@ import dev.snipme.highlights.model.SyntaxLanguage
 import dev.snipme.highlights.model.SyntaxTheme
 import dev.snipme.highlights.model.SyntaxThemes
 import dev.snipme.highlights.model.SyntaxThemes.useDark
+import dev.snipme.kodeview.view.CodeTextView
 import dev.snipme.kodeview.view.material3.CodeEditText
 
 fun main() = application {
@@ -108,14 +109,16 @@ fun main() = application {
                             .weight(1f)
                             .fillMaxWidth(),
                     ) {
-//                        CodeTextView(
-//                            modifier = Modifier.weight(1f)
-//                                .verticalScroll(rememberScrollState()),
-//                            highlights = highlights,
-//                            showLineNumbers = lineNumbersEnabled,
-//                            hasHorizontalScroll = true,
-//                            textStyle = MaterialTheme.typography.bodyMedium,
-//                        )
+                        CodeTextView(
+                            modifier = Modifier.weight(1f)
+                                .verticalScroll(rememberScrollState()),
+                            highlights = Highlights.Builder()
+                                .code(Samples.kotlin)
+                                .build(),
+                            showLineNumbers = lineNumbersEnabled,
+                            hasHorizontalScroll = true,
+                            textStyle = MaterialTheme.typography.bodyMedium,
+                        )
                         VerticalDivider(Modifier.padding(8.dp))
                         CodeEditText(
                             modifier = Modifier.weight(1f)
