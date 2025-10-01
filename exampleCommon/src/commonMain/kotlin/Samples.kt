@@ -9,7 +9,6 @@ class Samples {
     }
     """.trimIndent()
 
-        // TODO Fix dolars in strings
         val kotlin = """
         package dev.example
 
@@ -43,7 +42,7 @@ class Samples {
 
             // Inner class
             inner class Inner {
-                fun innerMethod() = "Inner class method, name: "\$"name"
+                fun innerMethod() = "Inner class method, name: ${'$'}name"
             }
 
             // Data class
@@ -62,7 +61,7 @@ class Samples {
 
             // Function with default arguments
             fun greet(greeting: String = "Hello") {
-                println('"\$"greeting, "\$"name!')
+                println('${'$'}greeting, ${'$'}name!')
             }
 
             // Inline function
@@ -79,7 +78,7 @@ class Samples {
             val lambda: (Int, Int) -> Int = { a, b -> a + b }
 
             // Extension function
-            fun String.addExclamation(): String = "$this!"
+            fun String.addExclamation(): String = "${'$'}this!"
 
             // Operator overloading
             operator fun plus(other: SampleClass): SampleClass {
@@ -94,9 +93,9 @@ class Samples {
             fun riskyOperation() {
                 try {
                     val result = 10 / Random.nextInt(0, 2)
-                    println("Result: "\$"result")
+                    println("Result: ${'$'}result")
                 } catch (e: ArithmeticException) {
-                    println("Caught exception: "\$"{e.message}")
+                    println("Caught exception: ${'$'}{e.message}")
                 } finally {
                     println("Finally block executed")
                 }
@@ -118,7 +117,7 @@ class Samples {
                 }
                 var count = 0
                 while (count < 3) {
-                    println("Count: "\$"count")
+                    println("Count: ${'$'}count")
                     count++
                 }
             }
