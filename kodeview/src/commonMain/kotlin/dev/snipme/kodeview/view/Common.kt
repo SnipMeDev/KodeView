@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import copySpanStyles
@@ -84,27 +85,26 @@ internal fun LineNumberWrapper(
     numbersPadding: PaddingValues = PaddingValues(),
     content: @Composable () -> Unit
 ) {
-    val modifierWithScroll = modifier
-        .then(
-            if (showLineNumbers || hasHorizontalScroll) {
-                Modifier.horizontalScroll(rememberScrollState())
-            } else {
-                Modifier
-            }
-        )
+    val modifierWithScroll = modifier.then(
+        if (showLineNumbers || hasHorizontalScroll) {
+            Modifier.horizontalScroll(rememberScrollState())
+        } else {
+            Modifier
+        }
+    )
 
     Row(modifier = modifier.fillMaxWidth()) {
         if (showLineNumbers) {
             val lines = text.lines().size
             Column(
-                modifier = Modifier
-                    .padding(numbersPadding),
-                horizontalAlignment = Alignment.End
+                modifier = Modifier.padding(numbersPadding), horizontalAlignment = Alignment.End
             ) {
                 for (i in 1..lines) {
                     Text(
                         text = i.toString(),
-                        style = lineNumberTextStyle,
+                        style = lineNumberTextStyle.copy(
+                            fontFamily = FontFamily.Monospace
+                        ),
                     )
                 }
             }
