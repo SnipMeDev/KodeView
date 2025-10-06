@@ -1,143 +1,157 @@
+import dev.snipme.highlights.model.SyntaxLanguage
+
 class Samples {
     companion object {
-        val javaStarter =
-            """
-    class Main {
-        public static void main(String[] args) {
+        val c = """
+        #include <stdio.h>
+        
+        int main() {
             int abcd = 100;
+            printf("Value: %d\n", abcd);
+            return 0;
         }
-    }
-    """.trimIndent()
+        """.trimIndent()
+
+        val cpp = """
+        #include <iostream>
+        using namespace std;
+        
+        int main() {
+            int abcd = 100;
+            cout << "Value: " << abcd << endl;
+            return 0;
+        }
+        """.trimIndent()
+
+        val dart = """
+        void main() {
+          int abcd = 100;
+          print("Value: ${'$'}abcd");
+        }
+        """.trimIndent()
+
+        val java = """
+        class Main {
+            public static void main(String[] args) {
+                int abcd = 100;
+                System.out.println("Value: " + abcd);
+            }
+        }
+        """.trimIndent()
+
+        val javaStarter = """
+        class Main {
+            public static void main(String[] args) {
+                int abcd = 100;
+                System.out.println("Value: " + abcd);
+            }
+        }
+        """.trimIndent()
 
         val kotlin = """
-        package dev.example
+        fun main() {
+            val abcd = 100
+            println("Value: ${'$'}abcd")
+        }
+        """.trimIndent()
 
-        import kotlin.random.Random
+        val rust = """
+        fn main() {
+            let abcd: i32 = 100;
+            println!("Value: {}", abcd);
+        }
+        """.trimIndent()
 
-        // Class declaration with primary constructor
-        class SampleClass(private val name: String, var age: Int) {
-
-            // Companion object
-            companion object {
-                const val CONSTANT = "This is a constant"
-                fun staticMethod() = println("This is a static method")
-            }
-
-            // Properties
-            val isAdult: Boolean
-                get() = age >= 18
-
-            // Secondary constructor
-            constructor(name: String) : this(name, 0)
-
-            // Enum class
-            enum class Status {
-                ACTIVE, INACTIVE, PENDING
-            }
-
-            // Nested class
-            class Nested {
-                fun nestedMethod() = "Nested class method"
-            }
-
-            // Inner class
-            inner class Inner {
-                fun innerMethod() = "Inner class method, name: ${'$'}name"
-            }
-
-            // Data class
-            data class Data(val id: Int, val value: String)
-
-            // Sealed class
-            sealed class Result {
-                data class Success(val data: String) : Result()
-                data class Failure(val error: String) : Result()
-            }
-
-            // Object declaration
-            object Singleton {
-                fun doSomething() = "Singleton object method"
-            }
-
-            // Function with default arguments
-            fun greet(greeting: String = "Hello") {
-                println('${'$'}greeting, ${'$'}name!')
-            }
-
-            // Inline function
-            inline fun inlineFunction(action: () -> Unit) {
-                action()
-            }
-
-            // Higher-order function
-            fun higherOrderFunction(operation: (Int, Int) -> Int): Int {
-                return operation(5, 10)
-            }
-
-            // Lambda expression
-            val lambda: (Int, Int) -> Int = { a, b -> a + b }
-
-            // Extension function
-            fun String.addExclamation(): String = "${'$'}this!"
-
-            // Operator overloading
-            operator fun plus(other: SampleClass): SampleClass {
-                return SampleClass(this.name + other.name, this.age + other.age)
-            }
-
-            // Inline class
-            @JvmInline
-            value class InlineClass(val value: String)
-
-            // Try-catch-finally
-            fun riskyOperation() {
-                try {
-                    val result = 10 / Random.nextInt(0, 2)
-                    println("Result: ${'$'}result")
-                } catch (e: ArithmeticException) {
-                    println("Caught exception: ${'$'}{e.message}")
-                } finally {
-                    println("Finally block executed")
-                }
-            }
-
-            // When expression
-            fun checkStatus(status: Status): String {
-                return when (status) {
-                    Status.ACTIVE -> "Active"
-                    Status.INACTIVE -> "Inactive"
-                    Status.PENDING -> "Pending"
-                }
-            }
-
-            // Loops
-            fun printNumbers() {
-                for (i in 1..5) {
-                    println(i)
-                }
-                var count = 0
-                while (count < 3) {
-                    println("Count: ${'$'}count")
-                    count++
-                }
-            }
-
-            // Annotations
-            @Deprecated("This method is deprecated")
-            fun deprecatedMethod() {
-                println("Deprecated method")
-            }
-
-            // Generics
-            fun <T> genericMethod(item: T): T {
-                return item
-            }
-
-            // Vararg
-            fun printAll(vararg items: String) {
-                items.forEach { println(it) }
+        val csharp = """
+        using System;
+        
+        class Program {
+            static void Main() {
+                int abcd = 100;
+                Console.WriteLine("Value: " + abcd);
             }
         }
-    """.trimIndent()
+        """.trimIndent()
+
+        val coffeescript = """
+        abcd = 100
+        console.log "Value: #{abcd}"
+        """.trimIndent()
+
+        val javascript = """
+        let abcd = 100;
+        console.log("Value: " + abcd);
+        """.trimIndent()
+
+        val perl = """
+        my \${'$'}abcd = 100;
+        print "Value: ${'$'}abcd\n";
+        """.trimIndent()
+
+        val python = """
+        abcd = 100
+        print("Value:", abcd)
+        """.trimIndent()
+
+        val ruby = """
+        abcd = 100
+        puts "Value: #{abcd}"
+        """.trimIndent()
+
+        val shell = """
+        #!/bin/bash
+        abcd=100
+        echo "Value: ${'$'}abcd"
+        """.trimIndent()
+
+        val swift = """
+        import Foundation
+
+        let abcd = 100
+        print("Value: \(abcd)")
+        """.trimIndent()
+
+        val typescript = """
+        let abcd: number = 100;
+        console.log("Value: " + abcd);
+        """.trimIndent()
+
+        val go = """
+        package main
+        import "fmt"
+
+        func main() {
+            abcd := 100
+            fmt.Println("Value:", abcd)
+        }
+        """.trimIndent()
+
+        val php = """
+        <?php
+        ${'$'}abcd = 100;
+        echo "Value: ${'$'}abcd\n";
+        ?>
+        """.trimIndent()
+
+        fun getSampleCode(language: SyntaxLanguage): String = when (language) {
+                    SyntaxLanguage.DEFAULT -> kotlin
+                    SyntaxLanguage.C -> c
+                    SyntaxLanguage.CPP -> cpp
+                    SyntaxLanguage.DART -> dart
+                    SyntaxLanguage.JAVA -> java
+                    SyntaxLanguage.KOTLIN -> kotlin
+                    SyntaxLanguage.RUST -> rust
+                    SyntaxLanguage.CSHARP -> csharp
+                    SyntaxLanguage.COFFEESCRIPT -> coffeescript
+                    SyntaxLanguage.JAVASCRIPT -> javascript
+                    SyntaxLanguage.PERL -> perl
+                    SyntaxLanguage.PYTHON -> python
+                    SyntaxLanguage.RUBY -> ruby
+                    SyntaxLanguage.SHELL -> shell
+                    SyntaxLanguage.SWIFT -> swift
+                    SyntaxLanguage.TYPESCRIPT -> typescript
+                    SyntaxLanguage.GO -> go
+                    SyntaxLanguage.PHP -> php
+            }
     }
 }
