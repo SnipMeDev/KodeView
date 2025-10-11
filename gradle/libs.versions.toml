@@ -2,7 +2,7 @@
 activityCompose = "1.9.2"
 appcompat = "1.7.0"
 coreKtx = "1.13.1"
-jvmTarget = "1.8"
+jvmTarget = "11"
 gradlePlugin = "8.1.0"
 
 kotlin = "2.2.20"
