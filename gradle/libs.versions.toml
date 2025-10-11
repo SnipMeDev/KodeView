@@ -5,16 +5,16 @@ coreKtx = "1.13.1"
 jvmTarget = "1.8"
 gradlePlugin = "8.1.0"
 
-kotlin = "2.0.20"
+kotlin = "2.2.20"
 ksp = "1.8.10-1.0.9"
 kotlinCompilerExtensionVersion = "1.5.3"
 
-kotlinAndroid = "2.0.20"
-kotlinMultiplatform = "2.0.20"
-compose = "1.6.11"
+kotlinAndroid = "2.2.20"
+kotlinMultiplatform = "2.2.20"
+compose = "1.9.0"
 androidLibrary = "8.6.1"
 kodeview = "0.8.0"
-highlights = "1.0.0"
+highlights = "1.1.0"
 composeMaterial = "1.4.0"
 
 [libraries]

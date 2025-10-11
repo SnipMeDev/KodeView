@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.multiplatform)
@@ -13,7 +15,7 @@ version = "0.9.0"
 
 android {
     namespace = "dev.snipme.kodeview"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 25
@@ -32,8 +34,10 @@ kotlin {
 
     androidTarget {
         compilations.all {
-            kotlinOptions {
-                jvmTarget = libs.versions.jvmTarget.get()
+            compileTaskProvider.configure {
+                compilerOptions {
+                    jvmTarget.set(JvmTarget.fromTarget(libs.versions.jvmTarget.get()))
+                }
             }
         }
     }
