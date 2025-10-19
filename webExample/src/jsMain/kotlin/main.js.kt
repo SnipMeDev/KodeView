@@ -1,6 +1,7 @@
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -22,7 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.CanvasBasedWindow
+import androidx.compose.ui.window.ComposeViewport
 import dev.snipme.highlights.Highlights
 import dev.snipme.highlights.model.SyntaxLanguage
 import dev.snipme.highlights.model.SyntaxTheme
@@ -30,6 +31,7 @@ import dev.snipme.highlights.model.SyntaxThemes
 import dev.snipme.highlights.model.SyntaxThemes.useDark
 import dev.snipme.kodeview.view.material3.CodeEditText
 import dev.snipme.kodeview.view.CodeTextView
+import kotlinx.browser.document
 import org.jetbrains.skiko.wasm.onWasmReady
 
 private val sampleCode =
@@ -43,11 +45,11 @@ private val sampleCode =
 
 @ExperimentalComposeUiApi
 fun main() {
+    val viewportContainer = document.getElementById("ComposeTarget")
+
     onWasmReady {
-        CanvasBasedWindow(
-            title = "KodeView example",
-            canvasElementId = "ComposeTarget",
-            applyDefaultStyles = true,
+        ComposeViewport(
+            viewportContainer!!
         ) {
             val isDarkModeState = remember { mutableStateOf(false) }
             val isDarkMode = isDarkModeState.value
