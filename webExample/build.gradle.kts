@@ -20,17 +20,8 @@ kotlin {
     }
 
     sourceSets {
-        val jsMain by getting {
-            dependencies {
-                implementation(compose.ui)
-                implementation(compose.foundation)
-                implementation(compose.material)
-                implementation(compose.material3)
-                implementation(compose.materialIconsExtended)
-                implementation(project(":kodeview"))
-            }
-        }
-        val wasmJsMain by getting {
+
+        val commonMain by getting {
             dependencies {
                 implementation(compose.ui)
                 implementation(compose.foundation)
