@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -58,13 +59,16 @@ private val sampleCode =
 @Composable
 fun App() {
     val isDarkModeState = remember { mutableStateOf(false) }
+    val areLineNumbersEnabled = remember { mutableStateOf(true) }
     val isDarkMode = isDarkModeState.value
+    val lineNumbersEnabled = areLineNumbersEnabled.value
 
     val highlightsState = remember {
         mutableStateOf(
             Highlights.Builder(code = sampleCode).build()
         )
     }
+
     val highlights = highlightsState.value
 
     fun updateSyntaxTheme(theme: SyntaxTheme) {
@@ -100,6 +104,10 @@ fun App() {
 
                 Spacer(Modifier.height(16.dp))
 
+                LineNumberSwitcher(lineNumbersEnabled, modifier = Modifier.fillMaxWidth()) { lineNumberEnabled ->
+                    areLineNumbersEnabled.value = lineNumberEnabled
+                }
+
                 Text(
                     modifier = Modifier.fillMaxWidth(),
                     text = "KodeView",
@@ -109,11 +117,11 @@ fun App() {
 
                 Spacer(modifier = Modifier.size(16.dp))
 
-                CodeTextView(highlights = highlights)
+                CodeTextView(highlights = highlights, showLineNumbers = lineNumbersEnabled)
 
                 Spacer(modifier = Modifier.size(16.dp))
 
-                Divider()
+                HorizontalDivider()
 
                 Spacer(modifier = Modifier.size(16.dp))
 
@@ -133,6 +141,7 @@ fun App() {
                         disabledIndicatorColor = Color.Transparent,
                         errorIndicatorColor = Color.Transparent,
                     ),
+                    showLineNumbers = lineNumbersEnabled,
                 )
 
                 Spacer(modifier = Modifier.size(16.dp))

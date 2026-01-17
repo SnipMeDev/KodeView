@@ -89,6 +89,7 @@ fun main() = application {
                         updateSyntaxTheme(highlights.getTheme().useDark(setToDarkMode)!!)
                     }
 
+
                     Spacer(Modifier.height(16.dp))
 
                     Text(
