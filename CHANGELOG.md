@@ -1,9 +1,10 @@
 ## [0.10.0]
 
 ### Added
-- Add toggleable line numbers to `CodeTextView` and `CodeEditText`
-- Updated sample app to include a toggle for line numbers
-- Added `textStyle` param to `CodeTextView` and `CodeEditText` for custom text styling
+- toggleable line numbers to `CodeTextView` and `CodeEditText`
+- line numbers toggle to sample app 
+- `textStyle` param to `CodeTextView` and `CodeEditText` for custom text styling
+- `hasHorizontalScroll` to support text next to lines scrolling
 
 ## [0.9.0]
 

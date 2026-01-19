@@ -1,17 +1,26 @@
 package dev.snipme.androidexample
 
+import Dropdown
+import LineNumberSwitcher
+import ThemeSwitcher
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Divider
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -20,10 +29,14 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -47,123 +60,127 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-private val sampleCode =
-    """
-    class Main {
-        public static void main(String[] args) {
-            int abcd = 100;
-        }
-    }
-    """.trimIndent()
-
 @Composable
 fun App() {
-    val isDarkModeState = remember { mutableStateOf(false) }
-    val areLineNumbersEnabled = remember { mutableStateOf(true) }
-    val isDarkMode = isDarkModeState.value
-    val lineNumbersEnabled = areLineNumbersEnabled.value
+    var isDarkMode by remember { mutableStateOf(false) }
+    var lineNumbersEnabled by remember { mutableStateOf(true) }
+    var currentLanguage by remember { mutableStateOf(SyntaxLanguage.DEFAULT) }
 
-    val highlightsState = remember {
-        mutableStateOf(
-            Highlights.Builder(code = sampleCode).build()
-        )
+    var highlights by remember {
+        mutableStateOf(Highlights.Builder(code = Samples.kotlin).build())
     }
 
-    val highlights = highlightsState.value
-
     fun updateSyntaxTheme(theme: SyntaxTheme) {
-        highlightsState.value = highlights.getBuilder()
-            .theme(theme)
-            .build()
+        highlights = highlights.getBuilder().theme(theme).build()
     }
 
     fun updateSyntaxLanguage(language: SyntaxLanguage) {
-        highlightsState.value = highlights.getBuilder()
+        highlights = highlights.getBuilder()
             .language(language)
+            .code(Samples.getSampleCode(language))
             .build()
+        currentLanguage = language
     }
 
     MaterialTheme(colorScheme = if (isDarkMode) darkColorScheme() else lightColorScheme()) {
-        Surface {
+        Surface(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
             Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
-                horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.SpaceBetween
-            ) {
-                Spacer(Modifier.height(8.dp))
+                modifier = Modifier.fillMaxSize().padding(16.dp),
 
+                horizontalAlignment = Alignment.Start,
+                verticalArrangement = Arrangement.Top
+            ) {
                 ThemeSwitcher(
                     isDarkMode,
-                    modifier = Modifier.fillMaxWidth(),
-                ) { setToDarkMode ->
-                    isDarkModeState.value = setToDarkMode
-                    updateSyntaxTheme(highlights.getTheme().useDark(setToDarkMode)!!)
+                    modifier = Modifier.fillMaxWidth()
+                ) { setToDark ->
+                    isDarkMode = setToDark
+                    updateSyntaxTheme(highlights.getTheme().useDark(setToDark)!!)
                 }
 
                 Spacer(Modifier.height(16.dp))
 
-                LineNumberSwitcher(lineNumbersEnabled, modifier = Modifier.fillMaxWidth()) { lineNumberEnabled ->
-                    areLineNumbersEnabled.value = lineNumberEnabled
+                LineNumberSwitcher(
+                    lineNumbersEnabled,
+                    modifier = Modifier.fillMaxWidth()
+                ) { enabled ->
+                    lineNumbersEnabled = enabled
                 }
 
+                Spacer(Modifier.height(16.dp))
+
                 Text(
-                    modifier = Modifier.fillMaxWidth(),
                     text = "KodeView",
                     fontSize = 18.sp,
-                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center
                 )
 
-                Spacer(modifier = Modifier.size(16.dp))
+                Spacer(Modifier.height(16.dp))
 
-                CodeTextView(highlights = highlights, showLineNumbers = lineNumbersEnabled)
+                key(currentLanguage) {
+                    CodeTextView(
+                        modifier = Modifier.weight(1f)
+                            .verticalScroll(rememberScrollState()),
+                        highlights = highlights.getBuilder()
+                            .code(Samples.getSampleCode(highlights.getLanguage())).build(),
+                        showLineNumbers = lineNumbersEnabled,
+                        hasHorizontalScroll = true,
+                        textStyle = MaterialTheme.typography.bodyLarge,
+                    )
+                }
 
-                Spacer(modifier = Modifier.size(16.dp))
+                Spacer(Modifier.height(16.dp))
 
                 HorizontalDivider()
 
-                Spacer(modifier = Modifier.size(16.dp))
+                Spacer(Modifier.height(16.dp))
 
-                Text("Edit this...")
-                CodeEditText(
-                    highlights = highlights,
-                    onValueChange = { textValue ->
-                        highlightsState.value = highlights.getBuilder()
-                            .code(textValue)
-                            .build()
-                    },
-                    colors = TextFieldDefaults.colors(
-                        unfocusedContainerColor = Color.Transparent,
-                        focusedContainerColor = Color.Transparent,
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent,
-                        disabledIndicatorColor = Color.Transparent,
-                        errorIndicatorColor = Color.Transparent,
-                    ),
-                    showLineNumbers = lineNumbersEnabled,
-                )
+                key(highlights.getLanguage()) {
+                    CodeEditText(
+                        modifier = Modifier.weight(1f)
+                            .verticalScroll(rememberScrollState()),
+                        highlights = highlights,
+                        showLineNumbers = lineNumbersEnabled,
+                        hasHorizontalScroll = true,
+                        textStyle = MaterialTheme.typography.bodyLarge,
+                        label = { Text("Edit code") },
+                        onValueChange = { newText ->
+                            highlights = highlights.getBuilder().code(newText).build()
+                        },
+                        colors = TextFieldDefaults.colors(
+                            unfocusedContainerColor = Color.Transparent,
+                            focusedContainerColor = Color.Transparent,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            disabledIndicatorColor = Color.Transparent,
+                            errorIndicatorColor = Color.Transparent,
+                        ),
+                    )
+                }
 
-                Spacer(modifier = Modifier.size(16.dp))
-
-                Spacer(modifier = Modifier.weight(1f))
+                Spacer(Modifier.height(16.dp))
 
                 Dropdown(
                     options = SyntaxThemes.getNames(),
-                    selected = SyntaxThemes.themes().keys.indexOf(highlights.getTheme().key),
+                    selected = SyntaxThemes.themes().keys.indexOf(highlights.getTheme().key)
                 ) { selectedThemeName ->
                     updateSyntaxTheme(
                         SyntaxThemes.themes(isDarkMode)[selectedThemeName.lowercase()]!!
                     )
                 }
 
-                Spacer(modifier = Modifier.size(16.dp))
+                Spacer(Modifier.height(16.dp))
 
                 Dropdown(
                     options = SyntaxLanguage.getNames(),
                     selected = SyntaxLanguage.getNames().indexOfFirst {
                         it.equals(highlights.getLanguage().name, ignoreCase = true)
-                    }) { selectedLanguage ->
+                    }
+                ) { selectedLanguage ->
                     updateSyntaxLanguage(SyntaxLanguage.getByName(selectedLanguage)!!)
                 }
             }

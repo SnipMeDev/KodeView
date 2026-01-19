@@ -21,7 +21,7 @@ repositories {
 ```
 
 ```shell
-implementation("dev.snipme:kodeview:0.9.0")
+implementation("dev.snipme:kodeview:0.10.0")
 ```
 
 ## Features ✨
@@ -31,6 +31,7 @@ implementation("dev.snipme:kodeview:0.9.0")
 - Multiple syntax languages (Java, Swift, Kotlin, C, ...)
 - Themes
 - Text bolding (emphasis)
+- Line numbers
 - Written in pure Kotlin, so available for many platforms 📱 💻 🖥️
 
 ## Support ☕
@@ -57,7 +58,12 @@ fun MyApp() {
 
    MaterialTheme {
       Column {
-        CodeTextView(highlights = highlights.value)
+        CodeTextView(
+            highlights = highlights.value,
+            showLineNumbers = true,
+            hasVerticalScroll = true,
+            hasHorizontalScroll = true,
+            )
       }
    }
 }
@@ -83,6 +89,9 @@ fun MyApp() {
       Column {
           CodeEditText(
               highlights = highlights.value,
+              showLineNumbers = true,
+              hasVerticalScroll = true,
+              hasHorizontalScroll = true,
               onValueChange = { textValue ->
                   highlights.value = highlights.value.getBuilder()
                       .code(textValue)
